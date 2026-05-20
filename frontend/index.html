@@ -1,0 +1,1993 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TumbuhCerah — Deteksi & Edukasi Stunting</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --green-dark: #1a3d2b;
+        --green-mid: #2d6a4f;
+        --green-soft: #52b788;
+        --green-pale: #b7e4c7;
+        --green-light: #d8f3dc;
+        --cream: #fdfaf4;
+        --cream2: #f5f0e8;
+        --orange: #e07a3a;
+        --orange-light: #fce8d5;
+        --red-soft: #d64444;
+        --yellow: #f0c040;
+        --text-dark: #1c2b22;
+        --text-mid: #4a6357;
+        --text-light: #8aab97;
+        --radius: 20px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--cream);
+        color: var(--text-dark);
+        overflow-x: hidden;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        background: var(--green-dark);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 50% at 20% 80%,
+            rgba(82, 183, 136, 0.18) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 50% 60% at 80% 20%,
+            rgba(45, 106, 79, 0.35) 0%,
+            transparent 70%
+          );
+      }
+
+      .hero-badge {
+        background: rgba(82, 183, 136, 0.2);
+        border: 1px solid rgba(82, 183, 136, 0.4);
+        color: var(--green-pale);
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 6px 18px;
+        border-radius: 100px;
+        margin-bottom: 2rem;
+        position: relative;
+        animation: fadeUp 0.8s ease both;
+      }
+
+      .hero h1 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(3rem, 8vw, 6.5rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.05;
+        position: relative;
+        animation: fadeUp 0.9s 0.1s ease both;
+      }
+
+      .hero h1 em {
+        font-style: italic;
+        color: var(--green-soft);
+      }
+
+      .hero p {
+        max-width: 520px;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-top: 1.5rem;
+        position: relative;
+        animation: fadeUp 1s 0.2s ease both;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 2.5rem;
+        position: relative;
+        animation: fadeUp 1s 0.3s ease both;
+      }
+
+      .btn-primary {
+        background: var(--green-soft);
+        color: var(--green-dark);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 14px 28px;
+        border-radius: 100px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .btn-primary:hover {
+        background: var(--green-pale);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 400;
+        padding: 14px 28px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .btn-outline:hover {
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #fff;
+      }
+
+      .hero-stats {
+        display: flex;
+        gap: 3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 4rem;
+        position: relative;
+        animation: fadeUp 1s 0.45s ease both;
+      }
+      .hero-stat-num {
+        font-family: "Fraunces", serif;
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: var(--green-soft);
+      }
+      .hero-stat-label {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 4px;
+      }
+
+      .scroll-hint {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        animation: fadeUp 1s 0.6s ease both;
+      }
+      .scroll-arrow {
+        width: 20px;
+        height: 20px;
+        border-right: 1.5px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1.5px solid rgba(255, 255, 255, 0.3);
+        transform: rotate(45deg);
+        animation: bounce 1.6s infinite;
+      }
+
+      /* ── SECTION ── */
+      .section {
+        padding: 6rem 2rem;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--green-soft);
+        font-weight: 500;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-label::before {
+        content: "";
+        display: inline-block;
+        width: 24px;
+        height: 1.5px;
+        background: var(--green-soft);
+      }
+
+      .section-title {
+        font-family: "Fraunces", serif;
+        font-size: clamp(1.9rem, 4vw, 3rem);
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--text-dark);
+        max-width: 600px;
+      }
+
+      /* ── WHAT IS STUNTING ── */
+      .what-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+        align-items: start;
+      }
+      @media (max-width: 700px) {
+        .what-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .what-visual {
+        background: var(--green-dark);
+        border-radius: var(--radius);
+        padding: 2.5rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .what-visual::after {
+        content: "";
+        position: absolute;
+        right: -30px;
+        top: -30px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(82, 183, 136, 0.12);
+      }
+      .height-compare {
+        display: flex;
+        align-items: flex-end;
+        gap: 24px;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      .child-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .bar {
+        width: 48px;
+        border-radius: 8px 8px 0 0;
+        position: relative;
+      }
+      .bar-normal {
+        height: 160px;
+        background: var(--green-soft);
+      }
+      .bar-stunting {
+        height: 100px;
+        background: var(--orange);
+      }
+      .bar-label {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+      }
+      .bar-value {
+        position: absolute;
+        top: -24px;
+        width: 100%;
+        text-align: center;
+        font-family: "Fraunces", serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+      }
+      .visual-caption {
+        text-align: center;
+        margin-top: 1.2rem;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .visual-title {
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        color: #fff;
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      .what-text {
+        padding: 0.5rem 0;
+      }
+      .what-text p {
+        color: var(--text-mid);
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+      }
+      .what-text strong {
+        color: var(--text-dark);
+        font-weight: 500;
+      }
+
+      /* ── FACT STRIP ── */
+      .fact-strip {
+        background: var(--green-dark);
+        padding: 3.5rem 2rem;
+        overflow: hidden;
+      }
+      .fact-strip-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2.5rem;
+      }
+      .fact-item {
+        text-align: center;
+      }
+      .fact-num {
+        font-family: "Fraunces", serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--green-soft);
+        line-height: 1;
+      }
+      .fact-desc {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.55);
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+
+      /* ── CAUSES ── */
+      .causes-bg {
+        background: var(--cream2);
+      }
+      .causes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.2rem;
+        margin-top: 3rem;
+      }
+      .cause-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 1.8rem;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .cause-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+      }
+      .cause-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .cause-card h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-dark);
+      }
+      .cause-card p {
+        font-size: 0.88rem;
+        color: var(--text-mid);
+        line-height: 1.6;
+      }
+
+      /* ── SIGNS ── */
+      .signs-list {
+        margin-top: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      @media (max-width: 600px) {
+        .signs-list {
+          grid-template-columns: 1fr;
+        }
+      }
+      .sign-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 1.2rem 1.4rem;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .sign-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 6px;
+      }
+      .sign-item p {
+        font-size: 0.9rem;
+        color: var(--text-mid);
+        line-height: 1.6;
+      }
+      .sign-item strong {
+        color: var(--text-dark);
+        display: block;
+        font-size: 0.95rem;
+        margin-bottom: 2px;
+      }
+
+      /* ── PREVENTION ── */
+      .prevention-timeline {
+        margin-top: 3.5rem;
+        position: relative;
+      }
+      .prevention-timeline::before {
+        content: "";
+        position: absolute;
+        left: 28px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--green-pale);
+      }
+      .timeline-item {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+      .timeline-dot {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+        border: 3px solid var(--cream2);
+      }
+      .timeline-content {
+        padding-top: 10px;
+      }
+      .timeline-content h3 {
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.4rem;
+      }
+      .timeline-content p {
+        font-size: 0.9rem;
+        color: var(--text-mid);
+        line-height: 1.7;
+      }
+
+      /* ── CHECKER SECTION ── */
+      .checker-wrapper {
+        background: var(--green-dark);
+        padding: 5rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .checker-wrapper::before {
+        content: "";
+        position: absolute;
+        right: -100px;
+        bottom: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(82, 183, 136, 0.12),
+          transparent 70%
+        );
+      }
+      .checker-inner {
+        max-width: 680px;
+        margin: 0 auto;
+        position: relative;
+      }
+      .checker-inner .section-title {
+        color: #fff;
+      }
+      .checker-inner > p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-top: 1rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .form-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius);
+        padding: 2rem 2.5rem;
+        backdrop-filter: blur(4px);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      @media (max-width: 560px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .form-card {
+          padding: 1.5rem;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--green-pale);
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 13px 16px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        color: #fff;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        appearance: none;
+      }
+      .form-group select option {
+        background: var(--green-dark);
+        color: #fff;
+      }
+      .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: var(--green-soft);
+        background: rgba(82, 183, 136, 0.1);
+      }
+
+      .form-section-title {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green-soft);
+        font-weight: 500;
+        margin: 1.5rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .form-section-title::before {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 1.5px;
+        background: var(--green-soft);
+      }
+
+      .status-select-wrapper {
+        position: relative;
+      }
+      .status-select-wrapper::after {
+        content: "▾";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+      }
+
+      .status-badge-preview {
+        display: inline-block;
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 100px;
+        margin-top: 6px;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .status-badge-preview.show {
+        opacity: 1;
+      }
+      .status-badge-preview.normal {
+        background: rgba(82, 183, 136, 0.25);
+        color: #b7e4c7;
+      }
+      .status-badge-preview.risiko {
+        background: rgba(240, 192, 64, 0.25);
+        color: #f8d980;
+      }
+      .status-badge-preview.buruk {
+        background: rgba(214, 68, 68, 0.25);
+        color: #f4a0a0;
+      }
+
+      .btn-check {
+        width: 100%;
+        background: var(--green-soft);
+        color: var(--green-dark);
+        font-family: "DM Sans", sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        letter-spacing: 0.01em;
+      }
+      .btn-check:hover {
+        background: var(--green-pale);
+        transform: translateY(-1px);
+      }
+      .btn-check:active {
+        transform: scale(0.99);
+      }
+      .btn-check:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* ── RESULT ── */
+      .result-panel {
+        display: none;
+        margin-top: 1.5rem;
+        border-radius: 16px;
+        padding: 1.5rem 1.8rem;
+        animation: slideIn 0.3s ease;
+      }
+      .result-panel.show {
+        display: block;
+      }
+      .result-panel.normal {
+        background: rgba(82, 183, 136, 0.15);
+        border: 1px solid rgba(82, 183, 136, 0.3);
+      }
+      .result-panel.risiko {
+        background: rgba(240, 192, 64, 0.15);
+        border: 1px solid rgba(240, 192, 64, 0.3);
+      }
+      .result-panel.stunting {
+        background: rgba(214, 68, 68, 0.15);
+        border: 1px solid rgba(214, 68, 68, 0.3);
+      }
+
+      .result-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 100px;
+        margin-bottom: 0.8rem;
+      }
+      .result-badge.normal {
+        background: rgba(82, 183, 136, 0.25);
+        color: var(--green-pale);
+      }
+      .result-badge.risiko {
+        background: rgba(240, 192, 64, 0.25);
+        color: #f8d980;
+      }
+      .result-badge.stunting {
+        background: rgba(214, 68, 68, 0.25);
+        color: #f4a0a0;
+      }
+
+      .result-title {
+        font-family: "Fraunces", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.5rem;
+      }
+      .result-desc {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        margin-bottom: 0.8rem;
+      }
+      .result-action {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-style: italic;
+      }
+
+      .zscore-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin: 1rem 0;
+      }
+      .zscore-item {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+      }
+      .zscore-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 4px;
+      }
+      .zscore-value {
+        font-family: "Fraunces", serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #fff;
+      }
+      .zscore-kategori {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 3px;
+      }
+
+      .status-gizi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+      .status-gizi-item {
+        background: rgba(0, 0, 0, 0.12);
+        border-radius: 8px;
+        padding: 0.7rem 0.9rem;
+      }
+      .sgi-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .sgi-value {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 3px;
+        font-weight: 500;
+      }
+
+      /* ── REKOMENDASI PANEL ── */
+      .rekom-panel {
+        display: none;
+        margin-top: 1.5rem;
+        border-radius: 20px;
+        overflow: hidden;
+        animation: slideIn 0.4s 0.1s ease both;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .rekom-panel.show {
+        display: block;
+      }
+
+      .rekom-header {
+        background: rgba(255, 255, 255, 0.07);
+        padding: 1.2rem 1.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .rekom-header-icon {
+        font-size: 1.3rem;
+      }
+      .rekom-header-title {
+        font-family: "Fraunces", serif;
+        font-size: 1.1rem;
+        color: #fff;
+        font-weight: 600;
+      }
+      .rekom-header-sub {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 2px;
+      }
+
+      .rekom-tabs {
+        display: flex;
+        background: rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .rekom-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .rekom-tab {
+        flex: 1;
+        min-width: 120px;
+        padding: 0.85rem 1rem;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          background 0.2s;
+        white-space: nowrap;
+        text-align: center;
+        letter-spacing: 0.02em;
+        border-bottom: 2px solid transparent;
+      }
+      .rekom-tab:hover {
+        color: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .rekom-tab.active {
+        color: var(--green-soft);
+        border-bottom-color: var(--green-soft);
+        background: rgba(82, 183, 136, 0.05);
+      }
+
+      .rekom-body {
+        padding: 1.5rem 1.8rem;
+      }
+      .rekom-content {
+        display: none;
+      }
+      .rekom-content.active {
+        display: block;
+        animation: fadeUp 0.25s ease;
+      }
+
+      .rekom-list {
+        list-style: none;
+      }
+      .rekom-list li {
+        display: flex;
+        gap: 12px;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        align-items: flex-start;
+      }
+      .rekom-list li:last-child {
+        border-bottom: none;
+      }
+      .rekom-list-icon {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        margin-top: 2px;
+      }
+
+      .rekom-icon-tindakan {
+        background: rgba(214, 68, 68, 0.25);
+      }
+      .rekom-icon-makan {
+        background: rgba(82, 183, 136, 0.25);
+      }
+      .rekom-icon-pantau {
+        background: rgba(240, 192, 64, 0.25);
+      }
+      .rekom-icon-dokter {
+        background: rgba(100, 149, 237, 0.25);
+      }
+
+      .catatan-box {
+        background: rgba(240, 192, 64, 0.1);
+        border: 1px solid rgba(240, 192, 64, 0.25);
+        border-radius: 10px;
+        padding: 1rem 1.2rem;
+        margin-top: 1rem;
+      }
+      .catatan-box p {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.75);
+        line-height: 1.65;
+      }
+      .catatan-box p + p {
+        margin-top: 0.5rem;
+      }
+      .catatan-label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #f8d980;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ── AI PANEL ── */
+      .ai-panel {
+        display: none;
+        margin-top: 1.2rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 16px;
+        padding: 1.5rem 1.8rem;
+        animation: slideIn 0.35s 0.2s ease both;
+      }
+      .ai-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .ai-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green-soft);
+        animation: pulse 1.5s infinite;
+      }
+      .ai-label {
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--green-soft);
+        font-weight: 500;
+      }
+
+      .ai-loading {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.88rem;
+        padding: 0.5rem 0;
+      }
+      .ai-spinner {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(82, 183, 136, 0.3);
+        border-top-color: var(--green-soft);
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+      }
+
+      .ai-section {
+        margin-bottom: 1.2rem;
+      }
+      .ai-section:last-child {
+        margin-bottom: 0;
+      }
+      .ai-section-label {
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 0.4rem;
+      }
+      .ai-section-text {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.7;
+      }
+
+      .ai-error {
+        font-size: 0.85rem;
+        color: rgba(214, 68, 68, 0.8);
+        padding: 0.5rem 0;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--green-dark);
+        padding: 3rem 2rem;
+        text-align: center;
+      }
+      .footer-logo {
+        font-family: "Fraunces", serif;
+        font-size: 1.8rem;
+        color: var(--green-soft);
+        font-style: italic;
+        font-weight: 300;
+      }
+      .footer-tagline {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 0.5rem;
+      }
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+      .footer-links a {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.4);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .footer-divider {
+        margin: 1.5rem auto;
+        width: 40px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .footer-copy {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.2);
+      }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: rotate(45deg) translateY(0);
+        }
+        50% {
+          transform: rotate(45deg) translateY(5px);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══════════════ HERO ══════════════ -->
+    <section class="hero">
+      <span class="hero-badge">Deteksi Dini</span>
+      <h1>Cek status <em>stunting</em><br />anak Anda sekarang</h1>
+      <p>
+        Masukkan data antropometri anak untuk mengetahui status pertumbuhannya
+        berdasarkan indikator TB/U dan BB/U sesuai Permenkes No. 2 Tahun 2020.
+      </p>
+      <div class="hero-cta">
+        <a href="#checker" class="btn-primary">Mulai Pemeriksaan</a>
+        <a href="#edukasi" class="btn-outline">Pelajari Stunting</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">21.6%</div>
+          <div class="hero-stat-label">Prevalensi Stunting Indonesia 2022</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">0–5</div>
+          <div class="hero-stat-label">Tahun Usia Kritis Pertumbuhan</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4 Indeks</div>
+          <div class="hero-stat-label">Standar Penilaian WHO & Permenkes</div>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Gulir ke bawah</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════ EDUKASI ══════════════ -->
+    <div id="edukasi">
+      <div class="section">
+        <div class="section-label">Apa itu Stunting?</div>
+        <div class="section-title">
+          Kondisi gagal tumbuh akibat kekurangan gizi kronis
+        </div>
+        <div class="what-grid">
+          <div class="what-visual">
+            <div class="visual-title">Perbandingan tinggi badan</div>
+            <div class="height-compare">
+              <div class="child-bar">
+                <div class="bar bar-normal">
+                  <div class="bar-value">87cm</div>
+                </div>
+                <div class="bar-label">Normal<br />2 th</div>
+              </div>
+              <div class="child-bar">
+                <div class="bar bar-stunting">
+                  <div class="bar-value">75cm</div>
+                </div>
+                <div class="bar-label">Stunting<br />2 th</div>
+              </div>
+            </div>
+            <div class="visual-caption">
+              Ilustrasi perbedaan tinggi badan anak usia sama
+            </div>
+          </div>
+          <div class="what-text">
+            <p>
+              Stunting adalah kondisi di mana tinggi badan anak lebih rendah
+              dari standar usianya, akibat
+              <strong>kekurangan gizi kronis</strong> — terutama pada 1.000 Hari
+              Pertama Kehidupan (HPK).
+            </p>
+            <p>
+              Dampaknya bukan hanya fisik. Anak stunting berisiko mengalami
+              <strong>gangguan perkembangan otak</strong>, kemampuan belajar
+              lebih rendah, dan produktivitas berkurang saat dewasa.
+            </p>
+            <p>
+              Menurut <strong>Permenkes No. 2 Tahun 2020</strong>, stunting
+              diklasifikasikan berdasarkan Z-score TB/U: pendek (−3 s/d &lt;−2
+              SD) dan sangat pendek (&lt;−3 SD).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ FACT STRIP ══════════════ -->
+    <div class="fact-strip">
+      <div class="fact-strip-inner">
+        <div class="fact-item">
+          <div class="fact-num">1000</div>
+          <div class="fact-desc">
+            Hari Pertama Kehidupan<br />periode emas pencegahan stunting
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">−2 SD</div>
+          <div class="fact-desc">
+            Ambang batas Z-score TB/U<br />untuk kategori pendek (stunted)
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">14%</div>
+          <div class="fact-desc">
+            Target prevalensi stunting<br />Indonesia tahun 2024
+          </div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-num">4 Indeks</div>
+          <div class="fact-desc">
+            BB/U · TB/U · BB/TB · IMT/U<br />standar Permenkes 2020
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CAUSES ══════════════ -->
+    <div class="causes-bg">
+      <div class="section">
+        <div class="section-label">Penyebab</div>
+        <div class="section-title">Faktor utama yang memicu stunting</div>
+        <div class="causes-grid">
+          <div class="cause-card">
+            <div class="cause-icon" style="background: #fff5f0">🍼</div>
+            <h3>Gizi Ibu Hamil</h3>
+            <p>
+              Kekurangan gizi ibu saat hamil berdampak langsung pada janin —
+              membatasi pertumbuhan dan perkembangan organ vital sejak dalam
+              kandungan.
+            </p>
+          </div>
+          <div class="cause-card">
+            <div class="cause-icon" style="background: #f0fff4">🥗</div>
+            <h3>MPASI Tidak Optimal</h3>
+            <p>
+              Pemberian MPASI yang terlalu cepat, terlambat, atau tidak bergizi
+              cukup menghambat pertumbuhan anak pada periode kritis 6–24 bulan.
+            </p>
+          </div>
+          <div class="cause-card">
+            <div class="cause-icon" style="background: #fff0f0">🦠</div>
+            <h3>Infeksi Berulang</h3>
+            <p>
+              Diare, ISPA, dan penyakit infeksi berulang menyebabkan tubuh
+              kehilangan nutrisi penting dan menghambat penyerapan zat gizi yang
+              dibutuhkan.
+            </p>
+          </div>
+          <div class="cause-card">
+            <div class="cause-icon" style="background: #f0f4ff">🚰</div>
+            <h3>Sanitasi Buruk</h3>
+            <p>
+              Akses air bersih yang terbatas dan sanitasi buruk meningkatkan
+              risiko infeksi pada anak, yang secara langsung memperburuk status
+              gizi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ TANDA & PENCEGAHAN ══════════════ -->
+    <div class="section">
+      <div class="section-label">Tanda-tanda</div>
+      <div class="section-title">Kenali gejala stunting sejak dini</div>
+      <div class="signs-list">
+        <div class="sign-item">
+          <div class="sign-dot" style="background: var(--orange)"></div>
+          <div>
+            <strong>Tinggi badan di bawah normal</strong>
+            <p>
+              TB/U di bawah −2 SD standar WHO untuk usia dan jenis kelamin anak.
+            </p>
+          </div>
+        </div>
+        <div class="sign-item">
+          <div class="sign-dot" style="background: var(--orange)"></div>
+          <div>
+            <strong>Pertumbuhan lambat</strong>
+            <p>
+              Kenaikan berat dan tinggi badan tidak sesuai grafik KMS/buku KIA
+              selama beberapa bulan.
+            </p>
+          </div>
+        </div>
+        <div class="sign-item">
+          <div class="sign-dot" style="background: var(--yellow)"></div>
+          <div>
+            <strong>Sering sakit</strong>
+            <p>
+              Sistem imun lemah menyebabkan anak mudah terserang infeksi
+              berulang.
+            </p>
+          </div>
+        </div>
+        <div class="sign-item">
+          <div class="sign-dot" style="background: var(--yellow)"></div>
+          <div>
+            <strong>Perkembangan terlambat</strong>
+            <p>
+              Keterlambatan bicara, berjalan, atau kemampuan kognitif dibanding
+              anak seusianya.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ PREVENTION ══════════════ -->
+    <div class="causes-bg">
+      <div class="section">
+        <div class="section-label">Pencegahan</div>
+        <div class="section-title">Langkah nyata cegah stunting</div>
+        <div class="prevention-timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: var(--green-mid)">
+              🤰
+            </div>
+            <div class="timeline-content">
+              <h3>Gizi Ibu Saat Hamil</h3>
+              <p>
+                Konsumsi tablet Fe, asam folat, dan makanan bergizi seimbang.
+                Rutin ANC minimal 4x selama kehamilan.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: var(--green-mid)">
+              🤱
+            </div>
+            <div class="timeline-content">
+              <h3>ASI Eksklusif 0–6 Bulan</h3>
+              <p>
+                Berikan ASI saja tanpa tambahan apapun hingga bayi berusia 6
+                bulan penuh. ASI adalah nutrisi terbaik dan terlengkap.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: var(--green-soft)">
+              🥣
+            </div>
+            <div class="timeline-content">
+              <h3>MPASI Tepat Waktu & Bergizi</h3>
+              <p>
+                Mulai MPASI pada usia 6 bulan dengan makanan bergizi, beragam,
+                cukup, dan aman (B2SA). Lanjutkan ASI hingga 2 tahun.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: var(--green-soft)">
+              📊
+            </div>
+            <div class="timeline-content">
+              <h3>Pemantauan Rutin di Posyandu</h3>
+              <p>
+                Timbang dan ukur tinggi badan anak setiap bulan. Plot di grafik
+                KMS untuk deteksi dini masalah pertumbuhan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHECKER ══════════════ -->
+    <div class="checker-wrapper" id="checker">
+      <div class="checker-inner">
+        <div class="section-label" style="color: var(--green-soft)">
+          — Deteksi Dini
+        </div>
+        <div class="section-title">
+          Cek status stunting<br />anak Anda sekarang
+        </div>
+        <p>
+          Masukkan data antropometri anak untuk mengetahui status pertumbuhannya
+          berdasarkan indikator TB/U dan BB/U.
+        </p>
+
+        <div class="form-card">
+          <!-- SECTION: Data Anak -->
+          <div class="form-section-title">Data Anak</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="usia">Usia Anak (Bulan)</label>
+              <input
+                type="number"
+                id="usia"
+                min="0"
+                max="60"
+                placeholder="Contoh: 24"
+              />
+            </div>
+            <div class="form-group">
+              <label for="jk">Jenis Kelamin</label>
+              <div class="status-select-wrapper">
+                <select id="jk">
+                  <option value="">— Pilih —</option>
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION: Pengukuran Antropometri -->
+          <div class="form-section-title">Pengukuran Antropometri</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tb_cm">Tinggi Badan (cm)</label>
+              <input
+                type="number"
+                id="tb_cm"
+                step="0.1"
+                placeholder="Contoh: 80.5"
+              />
+            </div>
+            <div class="form-group">
+              <label for="bb_kg">Berat Badan (kg)</label>
+              <input
+                type="number"
+                id="bb_kg"
+                step="0.1"
+                placeholder="Contoh: 11.2"
+              />
+            </div>
+          </div>
+
+          <!-- SECTION: Status Gizi Tambahan (Opsional) -->
+          <div class="form-section-title">
+            Status Gizi Tambahan
+            <span
+              style="
+                opacity: 0.5;
+                font-style: italic;
+                text-transform: none;
+                letter-spacing: 0;
+              "
+              >(Opsional)</span
+            >
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="status_bbtb">Status BB/TB</label>
+              <div class="status-select-wrapper">
+                <select id="status_bbtb" onchange="updateStatusBadge('bbtb')">
+                  <option value="">— Belum diukur —</option>
+                  <option value="gizi_buruk">
+                    Gizi Buruk (Severely Wasted)
+                  </option>
+                  <option value="gizi_kurang">Gizi Kurang (Wasted)</option>
+                  <option value="gizi_baik">Gizi Baik (Normal)</option>
+                  <option value="berisiko_lebih">Berisiko Gizi Lebih</option>
+                  <option value="gizi_lebih">Gizi Lebih (Overweight)</option>
+                  <option value="obesitas">Obesitas</option>
+                </select>
+              </div>
+              <div class="status-badge-preview" id="badge-bbtb"></div>
+            </div>
+            <div class="form-group">
+              <label for="status_imtu">Status IMT/U</label>
+              <div class="status-select-wrapper">
+                <select id="status_imtu" onchange="updateStatusBadge('imtu')">
+                  <option value="">— Belum diukur —</option>
+                  <option value="gizi_buruk">Gizi Buruk</option>
+                  <option value="gizi_kurang">Gizi Kurang</option>
+                  <option value="gizi_baik">Gizi Baik (Normal)</option>
+                  <option value="berisiko_lebih">Berisiko Gizi Lebih</option>
+                  <option value="gizi_lebih">Gizi Lebih (Overweight)</option>
+                  <option value="obesitas">Obesitas</option>
+                </select>
+              </div>
+              <div class="status-badge-preview" id="badge-imtu"></div>
+            </div>
+          </div>
+
+          <button class="btn-check" id="btn-check" onclick="cekStunting()">
+            Periksa Sekarang
+          </button>
+        </div>
+
+        <!-- RESULT PANEL -->
+        <div class="result-panel" id="result">
+          <div class="result-badge" id="result-badge"></div>
+          <div class="result-title" id="result-title"></div>
+          <div class="result-desc" id="result-desc"></div>
+
+          <div class="zscore-row" id="zscore-row" style="display: none">
+            <div class="zscore-item">
+              <div class="zscore-label">Z-score TB/U</div>
+              <div class="zscore-value" id="zscore-tb-val"></div>
+              <div class="zscore-kategori" id="zscore-tb-kat"></div>
+            </div>
+            <div class="zscore-item">
+              <div class="zscore-label">Z-score BB/U</div>
+              <div class="zscore-value" id="zscore-bb-val"></div>
+              <div class="zscore-kategori" id="zscore-bb-kat"></div>
+            </div>
+          </div>
+
+          <div
+            class="status-gizi-grid"
+            id="status-gizi-grid"
+            style="display: none"
+          >
+            <div class="status-gizi-item">
+              <div class="sgi-label">TB/U (Permenkes 2020)</div>
+              <div class="sgi-value" id="sgi-tbu"></div>
+            </div>
+            <div class="status-gizi-item">
+              <div class="sgi-label">BB/U (Permenkes 2020)</div>
+              <div class="sgi-value" id="sgi-bbu"></div>
+            </div>
+            <div
+              class="status-gizi-item"
+              id="sgi-bbtb-wrap"
+              style="display: none"
+            >
+              <div class="sgi-label">BB/TB (Input Manual)</div>
+              <div class="sgi-value" id="sgi-bbtb"></div>
+            </div>
+            <div
+              class="status-gizi-item"
+              id="sgi-imtu-wrap"
+              style="display: none"
+            >
+              <div class="sgi-label">IMT/U (Input Manual)</div>
+              <div class="sgi-value" id="sgi-imtu"></div>
+            </div>
+          </div>
+
+          <div class="result-action" id="result-action"></div>
+        </div>
+
+        <!-- REKOMENDASI PANEL -->
+        <div class="rekom-panel" id="rekom-panel">
+          <div class="rekom-header">
+            <div class="rekom-header-icon">📋</div>
+            <div>
+              <div class="rekom-header-title">Rekomendasi Tindak Lanjut</div>
+              <div class="rekom-header-sub">
+                Berdasarkan hasil penilaian Fuzzy Mamdani & Permenkes No. 2/2020
+              </div>
+            </div>
+          </div>
+          <div class="rekom-tabs">
+            <button class="rekom-tab active" onclick="switchTab('tindakan')">
+              ⚡ Tindakan Segera
+            </button>
+            <button class="rekom-tab" onclick="switchTab('makan')">
+              🥗 Pola Makan
+            </button>
+            <button class="rekom-tab" onclick="switchTab('pantau')">
+              📊 Pemantauan
+            </button>
+            <button class="rekom-tab" onclick="switchTab('dokter')">
+              🏥 Kapan ke Dokter
+            </button>
+          </div>
+          <div class="rekom-body">
+            <div class="rekom-content active" id="tab-tindakan">
+              <ul class="rekom-list" id="list-tindakan"></ul>
+            </div>
+            <div class="rekom-content" id="tab-makan">
+              <ul class="rekom-list" id="list-makan"></ul>
+            </div>
+            <div class="rekom-content" id="tab-pantau">
+              <ul class="rekom-list" id="list-pantau"></ul>
+            </div>
+            <div class="rekom-content" id="tab-dokter">
+              <ul class="rekom-list" id="list-dokter"></ul>
+            </div>
+            <div class="catatan-box" id="catatan-box" style="display: none">
+              <div class="catatan-label">⚠ Catatan Khusus</div>
+              <div id="catatan-content"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI PANEL -->
+        <div class="ai-panel" id="ai-panel">
+          <div class="ai-header">
+            <div class="ai-dot"></div>
+            <div class="ai-label">Analisis AI — Konselor Gizi Virtual</div>
+          </div>
+          <div class="ai-loading" id="ai-loading">
+            <div class="ai-spinner"></div>
+            <span>Menganalisis kondisi anak dan menyiapkan penjelasan…</span>
+          </div>
+          <div id="ai-content" style="display: none">
+            <div class="ai-section">
+              <div class="ai-section-label">Penjelasan Kondisi</div>
+              <div class="ai-section-text" id="ai-kondisi"></div>
+            </div>
+            <div class="ai-section">
+              <div class="ai-section-label">Saran untuk Orang Tua</div>
+              <div class="ai-section-text" id="ai-saran"></div>
+            </div>
+          </div>
+          <div class="ai-error" id="ai-error" style="display: none">
+            Analisis AI tidak tersedia saat ini. Gunakan rekomendasi di atas
+            sebagai panduan.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer>
+      <div class="footer-logo">TumbuhCerah</div>
+      <div class="footer-tagline">
+        Deteksi dini · Edukasi · Rekomendasi berbasis Permenkes No. 2 Tahun 2020
+      </div>
+      <div class="footer-links">
+        <a href="#edukasi">Edukasi</a>
+        <a href="#checker">Cek Stunting</a>
+        <!-- ✅ DIUBAH: Link sekarang membuka PDF Permenkes lokal -->
+        <a
+          href="https://peraturan.bpk.go.id/Home/Details/152505/permenkes-no-2-tahun-2020"
+          target="_blank"
+        >
+          Permenkes No. 2/2020
+        </a>
+        >
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-copy">
+        Sistem ini menggunakan metode Fuzzy Mamdani dan standar WHO yang
+        diadopsi dalam Permenkes No. 2 Tahun 2020. Tidak menggantikan diagnosis
+        medis profesional.
+      </div>
+    </footer>
+
+    <script>
+      // ======================
+      // STATUS BADGE PREVIEW
+      // ======================
+      const STATUS_LABEL = {
+        gizi_buruk: { label: "Gizi Buruk", cls: "buruk" },
+        gizi_kurang: { label: "Gizi Kurang", cls: "buruk" },
+        gizi_baik: { label: "Gizi Baik", cls: "normal" },
+        berisiko_lebih: { label: "Berisiko Lebih", cls: "risiko" },
+        gizi_lebih: { label: "Gizi Lebih", cls: "risiko" },
+        obesitas: { label: "Obesitas", cls: "buruk" },
+      };
+
+      function updateStatusBadge(type) {
+        const sel = document.getElementById("status_" + type);
+        const badge = document.getElementById("badge-" + type);
+        const val = sel.value;
+        if (val && STATUS_LABEL[val]) {
+          badge.textContent = STATUS_LABEL[val].label;
+          badge.className =
+            "status-badge-preview show " + STATUS_LABEL[val].cls;
+        } else {
+          badge.className = "status-badge-preview";
+        }
+      }
+
+      // ======================
+      // TABS
+      // ======================
+      function switchTab(name) {
+        document
+          .querySelectorAll(".rekom-tab")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".rekom-content")
+          .forEach((c) => c.classList.remove("active"));
+
+        const tabs = document.querySelectorAll(".rekom-tab");
+        const tabMap = { tindakan: 0, makan: 1, pantau: 2, dokter: 3 };
+        tabs[tabMap[name]].classList.add("active");
+        document.getElementById("tab-" + name).classList.add("active");
+      }
+
+      // ======================
+      // RENDER REKOMENDASI
+      // ======================
+      const REKOM_ICONS = {
+        tindakan: { icon: "!", cls: "rekom-icon-tindakan" },
+        makan: { icon: "✓", cls: "rekom-icon-makan" },
+        pantau: { icon: "◉", cls: "rekom-icon-pantau" },
+        dokter: { icon: "✚", cls: "rekom-icon-dokter" },
+      };
+
+      function renderList(listId, items, type) {
+        const ul = document.getElementById(listId);
+        ul.innerHTML = "";
+        const { icon, cls } = REKOM_ICONS[type];
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.innerHTML = `<div class="rekom-list-icon ${cls}">${icon}</div><span>${item}</span>`;
+          ul.appendChild(li);
+        });
+      }
+
+      function renderRekom(rekom, catatan) {
+        renderList("list-tindakan", rekom.tindakan_segera, "tindakan");
+        renderList("list-makan", rekom.pola_makan, "makan");
+        renderList("list-pantau", rekom.pemantauan, "pantau");
+        renderList("list-dokter", rekom.kapan_ke_dokter, "dokter");
+
+        const catatanBox = document.getElementById("catatan-box");
+        if (catatan && catatan.length > 0) {
+          const catatanContent = document.getElementById("catatan-content");
+          catatanContent.innerHTML = catatan.map((c) => `<p>${c}</p>`).join("");
+          catatanBox.style.display = "block";
+        } else {
+          catatanBox.style.display = "none";
+        }
+
+        switchTab("tindakan");
+      }
+
+      // ======================
+      // STATUS GIZI LABEL
+      // ======================
+      const BBTB_LABEL = {
+        gizi_buruk: "Gizi Buruk (Severely Wasted)",
+        gizi_kurang: "Gizi Kurang (Wasted)",
+        gizi_baik: "Gizi Baik (Normal)",
+        berisiko_lebih: "Berisiko Gizi Lebih",
+        gizi_lebih: "Gizi Lebih (Overweight)",
+        obesitas: "Obesitas",
+      };
+
+      // ======================
+      // MAIN FUNCTION
+      // ======================
+      async function cekStunting() {
+        const usia = parseInt(document.getElementById("usia").value);
+        const jk = document.getElementById("jk").value;
+        const tbCm = parseFloat(document.getElementById("tb_cm").value);
+        const bbKg = parseFloat(document.getElementById("bb_kg").value);
+        const statusBbtb = document.getElementById("status_bbtb").value;
+        const statusImtu = document.getElementById("status_imtu").value;
+
+        const panel = document.getElementById("result");
+        const badge = document.getElementById("result-badge");
+        const title = document.getElementById("result-title");
+        const desc = document.getElementById("result-desc");
+        const action = document.getElementById("result-action");
+        const btn = document.getElementById("btn-check");
+
+        // Validasi
+        if (isNaN(usia) || !jk || isNaN(tbCm) || isNaN(bbKg)) {
+          panel.className = "result-panel risiko show";
+          badge.className = "result-badge risiko";
+          badge.textContent = "⚠ Perhatian";
+          title.textContent = "Data belum lengkap";
+          desc.textContent =
+            "Mohon isi semua kolom wajib: usia, jenis kelamin, tinggi badan, dan berat badan.";
+          action.textContent = "";
+          document.getElementById("zscore-row").style.display = "none";
+          document.getElementById("status-gizi-grid").style.display = "none";
+          document.getElementById("rekom-panel").className = "rekom-panel";
+          document.getElementById("ai-panel").style.display = "none";
+          return;
+        }
+
+        if (usia < 0 || usia > 60) {
+          panel.className = "result-panel risiko show";
+          badge.className = "result-badge risiko";
+          badge.textContent = "⚠ Perhatian";
+          title.textContent = "Usia di luar rentang";
+          desc.textContent =
+            "Sistem ini hanya mendukung anak usia 0–60 bulan (0–5 tahun).";
+          action.textContent = "";
+          document.getElementById("zscore-row").style.display = "none";
+          document.getElementById("status-gizi-grid").style.display = "none";
+          document.getElementById("rekom-panel").className = "rekom-panel";
+          document.getElementById("ai-panel").style.display = "none";
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "Sedang memeriksa…";
+
+        try {
+          const resp = await fetch("/cek", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usia, jk, tb_cm: tbCm, bb_kg: bbKg }),
+          });
+
+          if (!resp.ok) {
+            const err = await resp.json();
+            throw new Error(err.error || "Gagal memproses data");
+          }
+
+          const data = await resp.json();
+          const {
+            z_tb,
+            z_bb,
+            status_gizi,
+            fuzzy,
+            rekomendasi,
+            catatan_tambahan,
+          } = data;
+          const status = fuzzy.status;
+
+          const cls =
+            status === "Stunting"
+              ? "stunting"
+              : status === "Risiko Stunting"
+                ? "risiko"
+                : "normal";
+          const icon =
+            status === "Stunting"
+              ? "⚠"
+              : status === "Risiko Stunting"
+                ? "△"
+                : "✓";
+
+          panel.className = `result-panel ${cls} show`;
+          badge.className = `result-badge ${cls}`;
+          badge.textContent = `${icon} ${status}`;
+          title.textContent = `Hasil: ${status}`;
+
+          const deskripsi = {
+            Stunting: `Berdasarkan hasil analisis Fuzzy Mamdani, anak terdeteksi mengalami stunting. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat stunting: ${(fuzzy.stunting * 100).toFixed(0)}%, risiko: ${(fuzzy.risiko * 100).toFixed(0)}%).`,
+            "Risiko Stunting": `Anak berada di zona risiko stunting. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat risiko: ${(fuzzy.risiko * 100).toFixed(0)}%). Intervensi dini sangat dianjurkan.`,
+            Normal: `Pertumbuhan anak tergolong normal. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat normal: ${(fuzzy.normal * 100).toFixed(0)}%). Pertahankan pola gizi seimbang.`,
+            "Tidak Terdefinisi":
+              "Data tidak dapat diproses dengan sistem fuzzy. Silakan periksa ke dokter.",
+          };
+
+          desc.textContent = deskripsi[status] || "";
+
+          document.getElementById("zscore-row").style.display = "grid";
+          document.getElementById("zscore-tb-val").textContent =
+            z_tb >= 0 ? `+${z_tb}` : `${z_tb}`;
+          document.getElementById("zscore-tb-kat").textContent =
+            status_gizi.tbu;
+          document.getElementById("zscore-bb-val").textContent =
+            z_bb >= 0 ? `+${z_bb}` : `${z_bb}`;
+          document.getElementById("zscore-bb-kat").textContent =
+            status_gizi.bbu;
+
+          document.getElementById("status-gizi-grid").style.display = "grid";
+          document.getElementById("sgi-tbu").textContent = status_gizi.tbu;
+          document.getElementById("sgi-bbu").textContent = status_gizi.bbu;
+
+          if (statusBbtb) {
+            document.getElementById("sgi-bbtb-wrap").style.display = "block";
+            document.getElementById("sgi-bbtb").textContent =
+              BBTB_LABEL[statusBbtb] || statusBbtb;
+          } else {
+            document.getElementById("sgi-bbtb-wrap").style.display = "none";
+          }
+          if (statusImtu) {
+            document.getElementById("sgi-imtu-wrap").style.display = "block";
+            document.getElementById("sgi-imtu").textContent =
+              BBTB_LABEL[statusImtu] || statusImtu;
+          } else {
+            document.getElementById("sgi-imtu-wrap").style.display = "none";
+          }
+
+          const sarans = {
+            Stunting: "→ Segera konsultasi ke dokter atau puskesmas terdekat",
+            "Risiko Stunting":
+              "→ Tingkatkan asupan gizi dan rutin ke posyandu setiap bulan",
+            Normal:
+              "→ Lanjutkan pola gizi seimbang dan kunjungan posyandu rutin",
+          };
+          action.textContent = sarans[status] || "";
+
+          const rekPanel = document.getElementById("rekom-panel");
+          rekPanel.className = "rekom-panel show";
+          renderRekom(rekomendasi, catatan_tambahan);
+
+          panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+          const aiPanel = document.getElementById("ai-panel");
+          const aiLoading = document.getElementById("ai-loading");
+          const aiContent = document.getElementById("ai-content");
+          const aiError = document.getElementById("ai-error");
+
+          aiPanel.style.display = "block";
+          aiLoading.style.display = "flex";
+          aiContent.style.display = "none";
+          aiError.style.display = "none";
+
+          const jkLabel = jk === "L" ? "Laki-laki" : "Perempuan";
+          const bbtbLabel = statusBbtb
+            ? BBTB_LABEL[statusBbtb] || statusBbtb
+            : "Tidak diukur";
+          const imtuLabel = statusImtu
+            ? BBTB_LABEL[statusImtu] || statusImtu
+            : "Tidak diukur";
+
+          const prompt = `Kamu adalah konselor gizi anak yang ramah dan empatik untuk orang tua Indonesia.
+
+Data anak:
+- Usia: ${usia} bulan
+- Jenis Kelamin: ${jkLabel}
+- Tinggi Badan: ${tbCm} cm (Z-score TB/U: ${z_tb}, Kategori: ${status_gizi.tbu})
+- Berat Badan: ${bbKg} kg (Z-score BB/U: ${z_bb}, Kategori: ${status_gizi.bbu})
+- Status BB/TB: ${bbtbLabel}
+- Status IMT/U: ${imtuLabel}
+- Hasil Fuzzy Mamdani: ${status} (skor: ${fuzzy.skor.toFixed(2)})
+
+Berikan penjelasan dalam 2 bagian menggunakan bahasa Indonesia yang hangat dan mudah dipahami orang tua awam. Jangan ubah hasil sistem.
+
+Balas HANYA dengan JSON berikut, tanpa markdown, tanpa penjelasan lain:
+{"kondisi":"(2-3 kalimat: jelaskan kondisi anak secara menyeluruh berdasarkan semua indikator, apa artinya bagi tumbuh kembangnya)","saran":"(3-4 kalimat: saran konkret dan praktis yang bisa langsung dilakukan orang tua berdasarkan kondisi spesifik anak ini, dan kapan harus ke dokter)"}`;
+
+          try {
+            const r = await fetch("https://api.anthropic.com/v1/messages", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                model: "claude-sonnet-4-20250514",
+                max_tokens: 1000,
+                messages: [{ role: "user", content: prompt }],
+              }),
+            });
+            const aiData = await r.json();
+            const raw = aiData.content
+              .map((b) => b.text || "")
+              .join("")
+              .trim();
+            const parsed = JSON.parse(raw.replace(/```json|```/g, "").trim());
+            document.getElementById("ai-kondisi").textContent = parsed.kondisi;
+            document.getElementById("ai-saran").textContent = parsed.saran;
+            aiLoading.style.display = "none";
+            aiContent.style.display = "block";
+          } catch (e) {
+            aiLoading.style.display = "none";
+            aiError.style.display = "block";
+          }
+        } catch (err) {
+          panel.className = "result-panel risiko show";
+          badge.className = "result-badge risiko";
+          badge.textContent = "⚠ Error";
+          title.textContent = "Terjadi Kesalahan";
+          desc.textContent =
+            err.message ||
+            "Gagal menghubungi server. Pastikan server Flask berjalan.";
+          action.textContent = "";
+          document.getElementById("rekom-panel").className = "rekom-panel";
+          document.getElementById("ai-panel").style.display = "none";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Periksa Sekarang";
+        }
+      }
+    </script>
+  </body>
+</html>
