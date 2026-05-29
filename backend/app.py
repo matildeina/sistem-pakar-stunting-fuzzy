@@ -4,8 +4,11 @@ import json
 import random
 from flask import Flask, render_template, request, jsonify, session
 
+
 # --- IMPORT LIBRARY SASTRAWI UNTUK NLP LOKAL ---
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+# --- HUBUNGKAN MODUL LOGIKA FUZZY INTERNAL ---
+from fuzzy_logic import fuzzy_stunting, buat_rekomendasi, klasifikasi_tbu, klasifikasi_bbu
 
 app = Flask(__name__, 
             template_folder='../frontend', 

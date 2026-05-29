@@ -1143,7 +1143,6 @@
     </style>
   </head>
   <body>
-    <!-- ══════════════ HERO ══════════════ -->
     <section class="hero">
       <span class="hero-badge">Deteksi Dini</span>
       <h1>Cek status <em>stunting</em><br />anak Anda sekarang</h1>
@@ -1151,9 +1150,10 @@
         Masukkan data antropometri anak untuk mengetahui status pertumbuhannya
         berdasarkan indikator TB/U dan BB/U sesuai Permenkes No. 2 Tahun 2020.
       </p>
-      <div class="hero-cta">
-        <a href="#checker" class="btn-primary">Mulai Pemeriksaan</a>
-        <a href="#edukasi" class="btn-outline">Pelajari Stunting</a>
+     <div class="hero-cta">
+      <a href="#checker" class="btn-primary">Mulai Pemeriksaan</a>
+      <a href="/chat" class="btn-primary" style="background: var(--orange); color: white;">💬 Konsultasi AI</a>
+      <a href="#edukasi" class="btn-outline">Pelajari Stunting</a>
       </div>
       <div class="hero-stats">
         <div>
@@ -1175,7 +1175,6 @@
       </div>
     </section>
 
-    <!-- ══════════════ EDUKASI ══════════════ -->
     <div id="edukasi">
       <div class="section">
         <div class="section-label">Apa itu Stunting?</div>
@@ -1213,7 +1212,7 @@
             <p>
               Dampaknya bukan hanya fisik. Anak stunting berisiko mengalami
               <strong>gangguan perkembangan otak</strong>, kemampuan belajar
-              lebih rendah, dan produktivitas berkurang saat dewasa.
+              lebih rendah, and produktivitas berkurang saat dewasa.
             </p>
             <p>
               Menurut <strong>Permenkes No. 2 Tahun 2020</strong>, stunting
@@ -1225,7 +1224,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ FACT STRIP ══════════════ -->
     <div class="fact-strip">
       <div class="fact-strip-inner">
         <div class="fact-item">
@@ -1255,7 +1253,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ CAUSES ══════════════ -->
     <div class="causes-bg">
       <div class="section">
         <div class="section-label">Penyebab</div>
@@ -1282,7 +1279,7 @@
             <div class="cause-icon" style="background: #fff0f0">🦠</div>
             <h3>Infeksi Berulang</h3>
             <p>
-              Diare, ISPA, dan penyakit infeksi berulang menyebabkan tubuh
+              Diare, ISPA, and penyakit infeksi berulang menyebabkan tubuh
               kehilangan nutrisi penting dan menghambat penyerapan zat gizi yang
               dibutuhkan.
             </p>
@@ -1300,7 +1297,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ TANDA & PENCEGAHAN ══════════════ -->
     <div class="section">
       <div class="section-label">Tanda-tanda</div>
       <div class="section-title">Kenali gejala stunting sejak dini</div>
@@ -1347,7 +1343,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ PREVENTION ══════════════ -->
     <div class="causes-bg">
       <div class="section">
         <div class="section-label">Pencegahan</div>
@@ -1405,7 +1400,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ CHECKER ══════════════ -->
     <div class="checker-wrapper" id="checker">
       <div class="checker-inner">
         <div class="section-label" style="color: var(--green-soft)">
@@ -1420,7 +1414,6 @@
         </p>
 
         <div class="form-card">
-          <!-- SECTION: Data Anak -->
           <div class="form-section-title">Data Anak</div>
           <div class="form-row">
             <div class="form-group">
@@ -1445,7 +1438,6 @@
             </div>
           </div>
 
-          <!-- SECTION: Pengukuran Antropometri -->
           <div class="form-section-title">Pengukuran Antropometri</div>
           <div class="form-row">
             <div class="form-group">
@@ -1468,28 +1460,24 @@
             </div>
           </div>
 
-          <!-- SECTION: Status Gizi Tambahan (Opsional) -->
           <div class="form-section-title">
             Status Gizi Tambahan
-            <span
-              style="
-                opacity: 0.5;
-                font-style: italic;
-                text-transform: none;
-                letter-spacing: 0;
-              "
-              >(Opsional)</span
-            >
+            <span style="opacity: 0.5; font-style: italic; text-transform: none; letter-spacing: 0;">(Otomatis Terisi)</span>
           </div>
+          
+          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; line-height: 1.4; margin-bottom: 1.2rem; margin-top: -0.5rem;">
+            💡 <strong>Info untuk Ayah/Bunda:</strong> Kolom di bawah ini akan terisi otomatis oleh sistem. 
+            <br>• <strong>BB/TB</strong> melihat proporsionalitas kelangsingan anak (mendeteksi kurus/gemuk tanpa melihat faktor umur).
+            <br>• <strong>IMT/U</strong> mengukur kepadatan massa tubuh anak yang disesuaikan dengan grafik usia perkembangannya.
+          </p>
+
           <div class="form-row">
             <div class="form-group">
               <label for="status_bbtb">Status BB/TB</label>
               <div class="status-select-wrapper">
                 <select id="status_bbtb" onchange="updateStatusBadge('bbtb')">
                   <option value="">— Belum diukur —</option>
-                  <option value="gizi_buruk">
-                    Gizi Buruk (Severely Wasted)
-                  </option>
+                  <option value="gizi_buruk">Gizi Buruk (Severely Wasted)</option>
                   <option value="gizi_kurang">Gizi Kurang (Wasted)</option>
                   <option value="gizi_baik">Gizi Baik (Normal)</option>
                   <option value="berisiko_lebih">Berisiko Gizi Lebih</option>
@@ -1521,7 +1509,6 @@
           </button>
         </div>
 
-        <!-- RESULT PANEL -->
         <div class="result-panel" id="result">
           <div class="result-badge" id="result-badge"></div>
           <div class="result-title" id="result-title"></div>
@@ -1540,11 +1527,7 @@
             </div>
           </div>
 
-          <div
-            class="status-gizi-grid"
-            id="status-gizi-grid"
-            style="display: none"
-          >
+          <div class="status-gizi-grid" id="status-gizi-grid" style="display: none">
             <div class="status-gizi-item">
               <div class="sgi-label">TB/U (Permenkes 2020)</div>
               <div class="sgi-value" id="sgi-tbu"></div>
@@ -1553,19 +1536,11 @@
               <div class="sgi-label">BB/U (Permenkes 2020)</div>
               <div class="sgi-value" id="sgi-bbu"></div>
             </div>
-            <div
-              class="status-gizi-item"
-              id="sgi-bbtb-wrap"
-              style="display: none"
-            >
+            <div class="status-gizi-item" id="sgi-bbtb-wrap" style="display: none">
               <div class="sgi-label">BB/TB (Input Manual)</div>
               <div class="sgi-value" id="sgi-bbtb"></div>
             </div>
-            <div
-              class="status-gizi-item"
-              id="sgi-imtu-wrap"
-              style="display: none"
-            >
+            <div class="status-gizi-item" id="sgi-imtu-wrap" style="display: none">
               <div class="sgi-label">IMT/U (Input Manual)</div>
               <div class="sgi-value" id="sgi-imtu"></div>
             </div>
@@ -1574,7 +1549,6 @@
           <div class="result-action" id="result-action"></div>
         </div>
 
-        <!-- REKOMENDASI PANEL -->
         <div class="rekom-panel" id="rekom-panel">
           <div class="rekom-header">
             <div class="rekom-header-icon">📋</div>
@@ -1619,7 +1593,6 @@
           </div>
         </div>
 
-        <!-- AI PANEL -->
         <div class="ai-panel" id="ai-panel">
           <div class="ai-header">
             <div class="ai-dot"></div>
@@ -1638,6 +1611,10 @@
               <div class="ai-section-label">Saran untuk Orang Tua</div>
               <div class="ai-section-text" id="ai-saran"></div>
             </div>
+            
+            <div class="ai-section" style="margin-top: 1.5rem; text-align: right;">
+              <a href="/chat" class="btn-primary" style="background: var(--green-soft); color: var(--green-dark); font-size: 0.88rem; padding: 10px 20px;">💬 Tanya Jawab Lebih Lanjut via Live Chat</a>
+            </div>
           </div>
           <div class="ai-error" id="ai-error" style="display: none">
             Analisis AI tidak tersedia saat ini. Gunakan rekomendasi di atas
@@ -1647,7 +1624,6 @@
       </div>
     </div>
 
-    <!-- ══════════════ FOOTER ══════════════ -->
     <footer>
       <div class="footer-logo">TumbuhCerah</div>
       <div class="footer-tagline">
@@ -1656,14 +1632,12 @@
       <div class="footer-links">
         <a href="#edukasi">Edukasi</a>
         <a href="#checker">Cek Stunting</a>
-        <!-- ✅ DIUBAH: Link sekarang membuka PDF Permenkes lokal -->
         <a
           href="https://peraturan.bpk.go.id/Home/Details/152505/permenkes-no-2-tahun-2020"
           target="_blank"
         >
           Permenkes No. 2/2020
         </a>
-        >
       </div>
       <div class="footer-divider"></div>
       <div class="footer-copy">
@@ -1711,7 +1685,7 @@
           .forEach((c) => c.classList.remove("active"));
 
         const tabs = document.querySelectorAll(".rekom-tab");
-        const tabMap = { tindakan: 0, makan: 1, pantau: 2, dokter: 3 };
+        const tabMap = { tindakan: 0, makan: 1, pantau: 2, doctor: 3, dokter: 3 };
         tabs[tabMap[name]].classList.add("active");
         document.getElementById("tab-" + name).classList.add("active");
       }
@@ -1768,9 +1742,45 @@
       };
 
       // ======================
-      // MAIN FUNCTION
+      // PENANGANAN UTAMA FORM SUBMIT
       // ======================
       async function cekStunting() {
+        // ════════════════════════════════════════════════════════════
+        // LANGKAH 1: FITUR INTERCEPT OTOMATISASI DROPDOWN UNTUK USER-FRIENDLY
+        // ════════════════════════════════════════════════════════════
+        const tempUsia = parseInt(document.getElementById("usia").value);
+        const tempTb = parseFloat(document.getElementById("tb_cm").value);
+        const tempBb = parseFloat(document.getElementById("bb_kg").value);
+
+        if (!isNaN(tempTb) && !isNaN(tempBb)) {
+          // 1. Hitung Otomatis Klasifikasi Proporsi BB/TB Pendekatan Sederhana
+          const rasioBBTB = tempBb / (tempTb / 10);
+          let autoBBTB = "gizi_baik";
+          if (rasioBBTB < 1.1) autoBBTB = "gizi_buruk";
+          else if (rasioBBTB < 1.3) autoBBTB = "gizi_kurang";
+          else if (rasioBBTB > 1.8) autoBBTB = "obesitas";
+          else if (rasioBBTB > 1.6) autoBBTB = "gizi_lebih";
+          else if (rasioBBTB > 1.5) autoBBTB = "berisiko_lebih";
+          
+          document.getElementById("status_bbtb").value = autoBBTB;
+          updateStatusBadge('bbtb');
+
+          // 2. Hitung Otomatis Rumus IMT/U: BB / (TB dalam meter pangkat 2)
+          const tbMeter = tempTb / 100;
+          const imtSkor = tempBb / (tbMeter * tbMeter);
+          
+          let autoIMTU = "gizi_baik";
+          if (imtSkor < 13) autoIMTU = "gizi_buruk";
+          else if (imtSkor < 14) autoIMTU = "gizi_kurang";
+          else if (imtSkor > 21) autoIMTU = "obesitas";
+          else if (imtSkor > 19) autoIMTU = "gizi_lebih";
+          else if (imtSkor > 18) autoIMTU = "berisiko_lebih";
+
+          document.getElementById("status_imtu").value = autoIMTU;
+          updateStatusBadge('imtu');
+        }
+        // ════════════════════════════════════════════════════════════
+
         const usia = parseInt(document.getElementById("usia").value);
         const jk = document.getElementById("jk").value;
         const tbCm = parseFloat(document.getElementById("tb_cm").value);
@@ -1785,14 +1795,12 @@
         const action = document.getElementById("result-action");
         const btn = document.getElementById("btn-check");
 
-        // Validasi
         if (isNaN(usia) || !jk || isNaN(tbCm) || isNaN(bbKg)) {
           panel.className = "result-panel risiko show";
           badge.className = "result-badge risiko";
           badge.textContent = "⚠ Perhatian";
           title.textContent = "Data belum lengkap";
-          desc.textContent =
-            "Mohon isi semua kolom wajib: usia, jenis kelamin, tinggi badan, dan berat badan.";
+          desc.textContent = "Mohon isi semua kolom wajib: usia, jenis kelamin, tinggi badan, dan berat badan.";
           action.textContent = "";
           document.getElementById("zscore-row").style.display = "none";
           document.getElementById("status-gizi-grid").style.display = "none";
@@ -1806,8 +1814,7 @@
           badge.className = "result-badge risiko";
           badge.textContent = "⚠ Perhatian";
           title.textContent = "Usia di luar rentang";
-          desc.textContent =
-            "Sistem ini hanya mendukung anak usia 0–60 bulan (0–5 tahun).";
+          desc.textContent = "Sistem ini hanya mendukung anak usia 0–60 bulan (0–5 tahun).";
           action.textContent = "";
           document.getElementById("zscore-row").style.display = "none";
           document.getElementById("status-gizi-grid").style.display = "none";
@@ -1842,18 +1849,8 @@
           } = data;
           const status = fuzzy.status;
 
-          const cls =
-            status === "Stunting"
-              ? "stunting"
-              : status === "Risiko Stunting"
-                ? "risiko"
-                : "normal";
-          const icon =
-            status === "Stunting"
-              ? "⚠"
-              : status === "Risiko Stunting"
-                ? "△"
-                : "✓";
+          const cls = status === "Stunting" ? "stunting" : status === "Risiko Stunting" ? "risiko" : "normal";
+          const icon = status === "Stunting" ? "⚠" : status === "Risiko Stunting" ? "△" : "✓";
 
           panel.className = `result-panel ${cls} show`;
           badge.className = `result-badge ${cls}`;
@@ -1864,21 +1861,16 @@
             Stunting: `Berdasarkan hasil analisis Fuzzy Mamdani, anak terdeteksi mengalami stunting. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat stunting: ${(fuzzy.stunting * 100).toFixed(0)}%, risiko: ${(fuzzy.risiko * 100).toFixed(0)}%).`,
             "Risiko Stunting": `Anak berada di zona risiko stunting. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat risiko: ${(fuzzy.risiko * 100).toFixed(0)}%). Intervensi dini sangat dianjurkan.`,
             Normal: `Pertumbuhan anak tergolong normal. Skor defuzzifikasi: ${fuzzy.skor.toFixed(2)} (derajat normal: ${(fuzzy.normal * 100).toFixed(0)}%). Pertahankan pola gizi seimbang.`,
-            "Tidak Terdefinisi":
-              "Data tidak dapat diproses dengan sistem fuzzy. Silakan periksa ke dokter.",
+            "Tidak Terdefinisi": "Data tidak dapat diproses dengan sistem fuzzy. Silakan periksa ke dokter.",
           };
 
           desc.textContent = deskripsi[status] || "";
 
           document.getElementById("zscore-row").style.display = "grid";
-          document.getElementById("zscore-tb-val").textContent =
-            z_tb >= 0 ? `+${z_tb}` : `${z_tb}`;
-          document.getElementById("zscore-tb-kat").textContent =
-            status_gizi.tbu;
-          document.getElementById("zscore-bb-val").textContent =
-            z_bb >= 0 ? `+${z_bb}` : `${z_bb}`;
-          document.getElementById("zscore-bb-kat").textContent =
-            status_gizi.bbu;
+          document.getElementById("zscore-tb-val").textContent = z_tb >= 0 ? `+${z_tb}` : `${z_tb}`;
+          document.getElementById("zscore-tb-kat").textContent = status_gizi.tbu;
+          document.getElementById("zscore-bb-val").textContent = z_bb >= 0 ? `+${z_bb}` : `${z_bb}`;
+          document.getElementById("zscore-bb-kat").textContent = status_gizi.bbu;
 
           document.getElementById("status-gizi-grid").style.display = "grid";
           document.getElementById("sgi-tbu").textContent = status_gizi.tbu;
@@ -1886,25 +1878,21 @@
 
           if (statusBbtb) {
             document.getElementById("sgi-bbtb-wrap").style.display = "block";
-            document.getElementById("sgi-bbtb").textContent =
-              BBTB_LABEL[statusBbtb] || statusBbtb;
+            document.getElementById("sgi-bbtb").textContent = BBTB_LABEL[statusBbtb] || statusBbtb;
           } else {
             document.getElementById("sgi-bbtb-wrap").style.display = "none";
           }
           if (statusImtu) {
             document.getElementById("sgi-imtu-wrap").style.display = "block";
-            document.getElementById("sgi-imtu").textContent =
-              BBTB_LABEL[statusImtu] || statusImtu;
+            document.getElementById("sgi-imtu").textContent = BBTB_LABEL[statusImtu] || statusImtu;
           } else {
             document.getElementById("sgi-imtu-wrap").style.display = "none";
           }
 
           const sarans = {
             Stunting: "→ Segera konsultasi ke dokter atau puskesmas terdekat",
-            "Risiko Stunting":
-              "→ Tingkatkan asupan gizi dan rutin ke posyandu setiap bulan",
-            Normal:
-              "→ Lanjutkan pola gizi seimbang dan kunjungan posyandu rutin",
+            "Risiko Stunting": "→ Tingkatkan asupan gizi dan rutin ke posyandu setiap bulan",
+            Normal: "→ Lanjutkan pola gizi seimbang dan kunjungan posyandu rutin",
           };
           action.textContent = sarans[status] || "";
 
@@ -1924,62 +1912,32 @@
           aiContent.style.display = "none";
           aiError.style.display = "none";
 
-          const jkLabel = jk === "L" ? "Laki-laki" : "Perempuan";
-          const bbtbLabel = statusBbtb
-            ? BBTB_LABEL[statusBbtb] || statusBbtb
-            : "Tidak diukur";
-          const imtuLabel = statusImtu
-            ? BBTB_LABEL[statusImtu] || statusImtu
-            : "Tidak diukur";
-
-          const prompt = `Kamu adalah konselor gizi anak yang ramah dan empatik untuk orang tua Indonesia.
-
-Data anak:
-- Usia: ${usia} bulan
-- Jenis Kelamin: ${jkLabel}
-- Tinggi Badan: ${tbCm} cm (Z-score TB/U: ${z_tb}, Kategori: ${status_gizi.tbu})
-- Berat Badan: ${bbKg} kg (Z-score BB/U: ${z_bb}, Kategori: ${status_gizi.bbu})
-- Status BB/TB: ${bbtbLabel}
-- Status IMT/U: ${imtuLabel}
-- Hasil Fuzzy Mamdani: ${status} (skor: ${fuzzy.skor.toFixed(2)})
-
-Berikan penjelasan dalam 2 bagian menggunakan bahasa Indonesia yang hangat dan mudah dipahami orang tua awam. Jangan ubah hasil sistem.
-
-Balas HANYA dengan JSON berikut, tanpa markdown, tanpa penjelasan lain:
-{"kondisi":"(2-3 kalimat: jelaskan kondisi anak secara menyeluruh berdasarkan semua indikator, apa artinya bagi tumbuh kembangnya)","saran":"(3-4 kalimat: saran konkret dan praktis yang bisa langsung dilakukan orang tua berdasarkan kondisi spesifik anak ini, dan kapan harus ke dokter)"}`;
-
           try {
-            const r = await fetch("https://api.anthropic.com/v1/messages", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                model: "claude-sonnet-4-20250514",
-                max_tokens: 1000,
-                messages: [{ role: "user", content: prompt }],
-              }),
-            });
-            const aiData = await r.json();
-            const raw = aiData.content
-              .map((b) => b.text || "")
-              .join("")
-              .trim();
-            const parsed = JSON.parse(raw.replace(/```json|```/g, "").trim());
-            document.getElementById("ai-kondisi").textContent = parsed.kondisi;
-            document.getElementById("ai-saran").textContent = parsed.saran;
-            aiLoading.style.display = "none";
-            aiContent.style.display = "block";
+            if (data.analisis_ai) {
+              const splitNarasi = data.analisis_ai.split("<br><br>");
+              const teksKondisi = splitNarasi[0] || "Analisis berhasil dimuat.";
+              const teksSaran = (splitNarasi[1] || "") + "<br><br>" + (splitNarasi[2] || "");
+
+              document.getElementById("ai-kondisi").innerHTML = teksKondisi;
+              document.getElementById("ai-saran").innerHTML = teksSaran;
+              
+              aiLoading.style.display = "none";
+              aiContent.style.display = "block";
+            } else {
+              throw new Error("Teks analisis kosong");
+            }
           } catch (e) {
+            console.error("Gagal memuat Analisis AI Lokal:", e);
             aiLoading.style.display = "none";
             aiError.style.display = "block";
           }
+
         } catch (err) {
           panel.className = "result-panel risiko show";
           badge.className = "result-badge risiko";
           badge.textContent = "⚠ Error";
           title.textContent = "Terjadi Kesalahan";
-          desc.textContent =
-            err.message ||
-            "Gagal menghubungi server. Pastikan server Flask berjalan.";
+          desc.textContent = err.message || "Gagal menghubungi server. Pastikan server Flask berjalan.";
           action.textContent = "";
           document.getElementById("rekom-panel").className = "rekom-panel";
           document.getElementById("ai-panel").style.display = "none";
