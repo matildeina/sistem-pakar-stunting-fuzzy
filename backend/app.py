@@ -1,14 +1,16 @@
-import requests
 import re
 import json
 import random
 from flask import Flask, render_template, request, jsonify, session
 
-
 # --- IMPORT LIBRARY SASTRAWI UNTUK NLP LOKAL ---
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-# --- HUBUNGKAN MODUL LOGIKA FUZZY INTERNAL ---
-from fuzzy_logic import fuzzy_stunting, buat_rekomendasi, klasifikasi_tbu, klasifikasi_bbu
+try:
+    from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+    factory = StemmerFactory()
+    stemmer = factory.create_stemmer()
+except Exception as e:
+    print(f"Peringatan: Library Sastrawi gagal dimuat ({str(e)}). Sistem beralih menggunakan teks asli.")
+    stemmer = None
 
 app = Flask(__name__, 
             template_folder='../frontend', 
@@ -16,10 +18,6 @@ app = Flask(__name__,
 
 # WAJIB: Secret key agar fitur Flask Session (Memori Jangka Pendek Chat) aktif
 app.secret_key = 'tumbuh_cerah_secret_key_untuk_memori_chat'
-
-# Inisialisasi Sastrawi Stemmer
-factory = StemmerFactory()
-stemmer = factory.create_stemmer()
 
 
 # ======================================================
@@ -34,7 +32,7 @@ except Exception as e:
 
 
 # ======================================================
-# FUNGSI PEMBANTU UTAMA
+# FUNGSI PEMBANTU UTAMA (UTILITY FUNCTIONS)
 # ======================================================
 def dapatkan_jawaban_kamus(key_kamus):
     data_jawaban = KAMUS_GIZI.get(key_kamus)
@@ -82,7 +80,7 @@ def gizi_normal(z):
 
 
 # ======================================================
-# LOGIKA PACKING MESIN FUZZY MAMDANI (MEMPERBAIKI NAMEERROR)
+# LOGIKA INTI MESIN FUZZY MAMDANI
 # ======================================================
 def fuzzy_stunting(tb_u, bb_u):
     tb_sp = sangat_pendek(tb_u)
@@ -124,7 +122,7 @@ def fuzzy_stunting(tb_u, bb_u):
 
 
 # ======================================================
-# KLASIFIKASI STANDAR KEMENKES RI
+# KLASIFIKASI STANDAR ANTROPOMETRI KEMENKES RI
 # ======================================================
 def klasifikasi_bbu(z):
     if z < -3: return "Berat Badan Sangat Kurang"
@@ -222,9 +220,9 @@ WHO_TB_L = {
     40: [98.6, 3.36], 41: [99.2, 3.4], 42: [99.9, 3.44], 43: [100.4, 3.48],
     44: [101.0, 3.52], 45: [101.6, 3.56], 46: [102.2, 3.6], 47: [102.8, 3.64],
     48: [103.3, 3.68], 49: [103.9, 3.72], 50: [104.4, 3.76], 51: [105.0, 3.8],
-    52: [105.6, 3.85], 53: [106.1, 3.89], 54: [106.7, 3.93], 55: [107.2, 3.97],
-    56: [107.8, 4.02], 57: [108.3, 4.06], 58: [108.9, 4.11], 59: [109.4, 4.15],
-    60: [110.0, 4.2]
+    52: [105.6, 3.85], 53: [107.2, 3.97], 54: [106.2, 4.77], 55: [107.2, 3.97],
+    56: [107.3, 4.91], 57: [107.8, 4.98], 58: [108.4, 5.05], 59: [108.9, 5.12],
+    60: [109.4, 5.19]
 }
 
 WHO_TB_P = {
@@ -285,9 +283,9 @@ WHO_BB_P = {
 }
 
 
-# ======================
-# ROUTING FLASK UTAMA
-# ======================
+# ======================================================
+# INDEKS SEGMEN KONTROL KELUARAN (URL HANDLER)
+# ======================================================
 @app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
@@ -364,22 +362,19 @@ def cek_stunting():
             "fuzzy": hasil_fuzzy,
             "rekomendasi": rekomendasi,
             "catatan_tambahan": catatan,
-            "analisis_ai": analisis_ai_teks  # --- KIRIMKAN VARIABEL BARU INI KE FRONTEND ---
+            "analisis_ai": analisis_ai_teks
         })
         
     except Exception as e:
         print(f"Error pada kalkulator backend: {str(e)}")
         return jsonify({"error": f"Data tidak valid: {str(e)}"}), 400
 
+
 # ======================================================
 # FUNGSI INTENT MATCHING MODULAR
 # ======================================================
 def match_intent(pesan_clean, pesan_stemmed):
-    """
-    Mencocokkan pesan user ke intent kamus.
-    Mengembalikan key kamus atau None jika tidak cocok.
-    """
-    # ── SAPAAN & BASA-BASI ──────────────────────────────────────────────────
+    """Mencocokkan pesan user ke intent kamus."""
     if has_any(["terima kasih", "makasih", "thanks", "thx"], pesan_clean):
         if has_any(["dokter", "dok", "bapak", "ibu"], pesan_clean):
             return "terima kasih dokter"
@@ -395,7 +390,6 @@ def match_intent(pesan_clean, pesan_stemmed):
         if "malam" in pesan_clean:   return "malam"
         return "halo"
 
-    # ── TENTANG APLIKASI ────────────────────────────────────────────────────
     if has_any(["tumbuhcerah", "tumbuh cerah", "aplikasi ini", "tentang app", "cara kerja", "cara pakai", "cara guna", "fitur"], pesan_clean):
         if has_any(["cara", "fitur", "pakai", "guna", "kerja"], pesan_clean):
             return "cara kerja aplikasi"
@@ -403,7 +397,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["siapa kamu", "siapa anda", "apa kamu", "kamu siapa", "kamu apa", "anda siapa"], pesan_clean):
         return "tentang tumbuhcerah"
 
-    # ── TOPIK STUNTING SPESIFIK Terlebih Dahulu (Urutan Cerdas Anti-Bentrokan) ──
     if has_any(["ciri", "tanda", "gejala", "risiko stunting", "indikator"], pesan_stemmed):
         return "ciri stunting"
     if has_any(["gtm", "gerakan tutup mulut", "mogok makan", "anak tidak mau makan", "susah makan", "lesu"], pesan_clean):
@@ -416,7 +409,7 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["sembuh", "pulih", "sembuhkan", "obati stunting", "bisa normal", "bisa sembuh"], pesan_stemmed):
         return "sembuh stunting"
     if has_any(["mitos", "hoaks", "salah kaprah", "fakta stunting"], pesan_stemmed):
-        if has_any(["pendek", "tinggi", "stunting", "gen", "keturunan", "genetik"], pesan_stemmed):
+        if "pendek" in pesan_stemmed or "tinggi" in pesan_stemmed or "stunting" in pesan_stemmed or "gen" in pesan_stemmed or "keturunan" in pesan_stemmed or "genetik" in pesan_stemmed:
             return "mitos pendek"
     if has_any(["data stunting", "angka stunting", "prevalensi", "statistik stunting", "indonesia stunting"], pesan_clean):
         return "stunting data indonesia"
@@ -429,15 +422,12 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["stunting lahir", "lahir stunting", "baru lahir stunting", "iugr", "intrauterine"], pesan_clean):
         return "stunting lahir"
 
-    # ── DEFINISI UMUM (Diletakkan di Bawah Topik Spesifik) ──────────────────────
     if has_any(["apa itu stunting", "apa stunting", "pengertian stunting", "definisi stunting", "arti stunting", "maksud stunting"], pesan_clean):
         return "apa stunting"
 
-    # ── 1000 HPK ────────────────────────────────────────────────────────────
     if has_any(["1000 hari", "1000hpk", "hpk", "seribu hari", "hari pertama kehidupan"], pesan_clean):
         return "1000 hpk"
 
-    # ── ASI ─────────────────────────────────────────────────────────────────
     if has_any(["asi eksklusif", "asi exclusive", "6 bulan asi", "asi saja"], pesan_clean):
         return "asi eksklusif"
     if has_any(["manfaat asi", "kegunaan asi", "fungsi asi", "kenapa asi", "mengapa asi penting"], pesan_clean):
@@ -453,7 +443,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["air minum bayi", "boleh minum air", "kapan minum air", "bayi minum air putih"], pesan_clean):
         return "air minum bayi"
 
-    # ── MPASI ───────────────────────────────────────────────────────────────
     if has_any(["mulai mpasi", "kapan mpasi", "umur mpasi", "usia mpasi", "awal mpasi"], pesan_clean):
         return "mulai mpasi"
     if has_any(["mpasi terlalu dini", "mpasi sebelum 6", "mpasi 4 bulan", "mpasi 5 bulan", "mpasi cepat"], pesan_clean):
@@ -468,8 +457,8 @@ def match_intent(pesan_clean, pesan_stemmed):
         return "jadwal makan bayi"
     if has_any(["mitos mpasi", "hoaks mpasi", "boleh mpasi", "pantangan mpasi"], pesan_clean):
         return "mitos mpasi"
-    if_any = has_any(["cara masak mpasi", "olah mpasi", "cara buat mpasi", "masak mpasi", "pengolahan mpasi"], pesan_clean)
-    if if_any: return "cara masak mpasi"
+    if has_any(["cara masak mpasi", "olah mpasi", "cara buat mpasi", "masak mpasi", "pengolahan mpasi"], pesan_clean):
+        return "cara masak mpasi"
     if has_any(["minyak mpasi", "minyak dalam mpasi", "tambah minyak", "vco mpasi", "minyak kelapa"], pesan_clean):
         return "minyak dalam mpasi"
     if has_any(["garam mpasi", "garam bayi", "garam anak", "kapan boleh garam"], pesan_clean):
@@ -489,13 +478,11 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["menu 9 bulan", "menu 10 bulan", "menu 11 bulan"], pesan_clean):
         return "menu sehat 9 bulan"
 
-    # ── MASALAH MAKAN UTAMA ──────────────────────────────────────────────────
     if has_any(["picky eater", "pilih makan", "pilih-pilih", "pemilih makanan", "tidak mau sayur"], pesan_clean):
         return "picky eater"
-    if has_any(["camilan", "snack sehat", "makanan selingan", "cemilan anak"], pesan_clean):
+    if has_any(["camilan", "snack sehat", "makanan selingan", "cemilan child"], pesan_clean):
         return "camilan sehat"
 
-    # ── PROTEIN & MAKANAN SPESIFIK ──────────────────────────────────────────
     if has_any(["protein hewani", "protein hewan", "pentingnya protein", "fungsi protein"], pesan_clean):
         return "protein hewani"
     if has_any(["makanan cegah", "makanan stunting", "makanan anti stunting", "makanan terbaik anak"], pesan_clean):
@@ -517,7 +504,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["minyak ikan", "suplemen omega", "fish oil"], pesan_clean):
         return "minyak ikan"
 
-    # ── ZAT GIZI MIKRO ──────────────────────────────────────────────────────
     if has_any(["zat besi", "fe ", "ferum", "hemoglobin", "anemia besi"], pesan_clean):
         return "zat besi"
     if has_any(["kalsium", "ca ", "tulang anak", "kuat tulang", "keropos"], pesan_clean):
@@ -535,7 +521,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["tablet tambah darah", "ttd", "suplemen ibu hamil", "tablet besi ibu"], pesan_clean):
         return "tablet tambah darah"
 
-    # ── KONDISI & PENYAKIT ──────────────────────────────────────────────────
     if has_any(["anemia", "pucat", "lemas anak", "kekurangan darah", "hb rendah"], pesan_clean):
         return "anemia anak"
     if has_any(["kurang gizi", "malnutrisi", "gizi buruk anak", "kekurangan gizi"], pesan_clean):
@@ -565,8 +550,7 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["bayi rewel", "bayi nangis terus", "bayi menangis", "kolik", "rewel malam"], pesan_clean):
         return "bayi rewel"
 
-    # ── OTAK & PERKEMBANGAN ─────────────────────────────────────────────────
-    if has_any(["otak", "cerdas", "iq", "kecerdasan", "kognitif", "memori anak"], pesan_stemmed):
+    if stemmer and has_any(["otak", "cerdas", "iq", "kecerdasan", "kognitif", "memori anak"], pesan_stemmed):
         return "otak cerdas"
     if has_any(["perkembangan anak", "tumbuh kembang", "milestone", "tahap perkembangan", "motorik"], pesan_clean):
         return "perkembangan anak"
@@ -577,7 +561,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["aktivitas fisik", "olahraga anak", "gerak anak", "bermain aktif", "tummy time"], pesan_clean):
         return "aktivitas fisik anak"
 
-    # ── IBU HAMIL & GIZI IBU ─────────────────────────────────────────────────
     if has_any(["gizi ibu hamil", "makan ibu hamil", "nutrisi ibu hamil", "hamil gizi"], pesan_clean):
         return "gizi ibu hamil"
     if has_any(["stres ibu", "depresi ibu", "baby blues", "depresi pasca", "mental ibu", "kesehatan ibu"], pesan_clean):
@@ -585,7 +568,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["pola asuh", "pengasuhan", "cara asuh", "parenting gizi"], pesan_clean):
         return "pola asuh gizi"
 
-    # ── POSYANDU & PROGRAM ───────────────────────────────────────────────────
     if has_any(["posyandu", "puskesmas gizi", "kunjungan posyandu"], pesan_clean):
         if has_any(["manfaat", "pentingnya", "kegunaan", "kenapa posyandu"], pesan_clean):
             return "posyandu manfaat"
@@ -601,7 +583,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["dokter gizi", "kapan ke dokter", "konsultasi dokter", "spesialis gizi", "sp.gk", "sp.a"], pesan_clean):
         return "dokter gizi"
 
-    # ── PEMANTAUAN PERTUMBUHAN GRAFIK ─────────────────────────────────────────
     if has_any(["timbang anak", "timbang berat", "pantau pertumbuhan", "monitoring tumbuh"], pesan_clean):
         return "timbang anak"
     if has_any(["baca zscore", "z score", "zscore", "z-score", "cara baca grafik", "sd grafik", "baca kms"], pesan_clean):
@@ -615,7 +596,6 @@ def match_intent(pesan_clean, pesan_stemmed):
     if has_any(["growth faltering", "bb tidak naik", "berat stagnan", "bb stagnan", "bb turun", "berat tidak naik"], pesan_clean):
         return "growth faltering"
 
-    # ── SUSU & LIABILITAS LAINNYA ────────────────────────────────────────────
     if has_any(["susu formula", "sufor", "susu sapi formula", "formula bayi"], pesan_clean):
         return "susu formula"
     if has_any(["kolesterol anak", "lemak anak", "kuning telur kolesterol", "takut lemak"], pesan_clean):
@@ -639,7 +619,7 @@ def api_chat():
 
     try:
         pesan_clean = pesan_user.lower().strip()
-        pesan_stemmed = stemmer.stem(pesan_clean)
+        pesan_stemmed = stemmer.stem(pesan_clean) if stemmer else pesan_clean
         jawaban_ai = None
 
         # ── 1. Deteksi komponen data dari pesan menggunakan Regex ──────────────────
