@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: tumbuhcerah_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-tumbuh_cerah_super_secret_key_2026}
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///tumbuh_cerah.db}
+      - FLASK_ENV=production
+    volumes:
+      - ../backend/instance:/app/instance
+      - ../backend/logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - tumbuhcerah_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: tumbuhcerah_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/templates:/usr/share/nginx/html
+      - ../frontend/static:/usr/share/nginx/html/static
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - tumbuhcerah_net
+
+networks:
+  tumbuhcerah_net:
+    driver: bridge

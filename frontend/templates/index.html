@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TumbuhCerah — Deteksi & Edukasi Stunting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  </head>
+  <body>
+    <section class="hero">
+      <span class="hero-badge">Deteksi Dini</span>
+      <h1>Cek status <em>stunting</em><br />anak Anda sekarang</h1>
+      <p>Masukkan data antropometri anak untuk mengetahui status pertumbuhannya berdasarkan indikator TB/U dan BB/U sesuai Permenkes No. 2 Tahun 2020.</p>
+      <div class="hero-cta">
+
+      <a href="#checker" class="btn-primary">Mulai Pemeriksaan</a>
+      <a href="/chat" class="btn-primary" style="background: var(--orange); color:white;">💬 Konsultasi AI</a>
+      <a href="/dashboard" class="btn-outline">📊 Dashboard</a>
+      <a href="/logout" class="btn-outline">🚪 Logout</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">21.6%</div>
+          <div class="hero-stat-label">Prevalensi Stunting Indonesia 2022</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">0–5</div>
+          <div class="hero-stat-label">Tahun Usia Kritis Pertumbuhan</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">4 Indeks</div>
+          <div class="hero-stat-label">Standar Penilaian WHO & Permenkes</div>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Gulir ke bawah</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <div class="checker-wrapper" id="checker">
+      <div class="checker-inner">
+        <div class="section-label" style="color: var(--green-soft)">— Deteksi Dini</div>
+        <div class="section-title">Cek status stunting<br />anak Anda sekarang</div>
+        <p>Masukkan data antropometri anak untuk mengetahui status pertumbuhannya berdasarkan indikator TB/U dan BB/U.</p>
+
+        <div class="form-card">
+          <div class="form-section-title">Data Anak</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="usia">Usia Anak (Bulan)</label>
+              <input type="number" id="usia" min="0" max="60" placeholder="Contoh: 24" />
+            </div>
+            <div class="form-group">
+              <label for="jk">Jenis Kelamin</label>
+              <div class="status-select-wrapper">
+                <select id="jk">
+                  <option value="">— Pilih —</option>
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section-title">Pengukuran Antropometri</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tb_cm">Tinggi Badan (cm)</label>
+              <input type="number" id="tb_cm" step="0.1" placeholder="Contoh: 80.5" />
+            </div>
+            <div class="form-group">
+              <label for="bb_kg">Berat Badan (kg)</label>
+              <input type="number" id="bb_kg" step="0.1" placeholder="Contoh: 11.2" />
+            </div>
+          </div>
+
+          <div class="form-section-title">Status Gizi Tambahan <span style="opacity: 0.5; font-style: italic; text-transform: none; letter-spacing: 0;">(Otomatis Terisi)</span></div>
+          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.8rem; line-height: 1.4; margin-bottom: 1.2rem; margin-top: -0.5rem;">
+            💡 <strong>Info untuk Ayah/Bunda:</strong> Kolom di bawah ini akan terisi otomatis oleh sistem penunjang keputusan.
+          </p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="status_bbtb">Status BB/TB</label>
+              <div class="status-select-wrapper">
+                <select id="status_bbtb">
+                  <option value="">— Belum diukur —</option>
+                  <option value="gizi_baik">Gizi Baik (Normal)</option>
+                  <option value="gizi_kurang">Gizi Kurang (Wasted)</option>
+                  <option value="gizi_buruk">Gizi Buruk (Severely Wasted)</option>
+                  <option value="berisiko_lebih">Berisiko Gizi Lebih</option>
+                  <option value="gizi_lebih">Gizi Lebih (Overweight)</option>
+                  <option value="obesitas">Obesitas</option>
+                </select>
+              </div>
+              <div class="status-badge-preview" id="badge-bbtb"></div>
+            </div>
+            <div class="form-group">
+              <label for="status_imtu">Status IMT/U</label>
+              <div class="status-select-wrapper">
+                <select id="status_imtu">
+                  <option value="">— Belum diukur —</option>
+                  <option value="gizi_baik">Gizi Baik (Normal)</option>
+                  <option value="gizi_kurang">Gizi Kurang</option>
+                  <option value="gizi_buruk">Gizi Buruk</option>
+                  <option value="berisiko_lebih">Berisiko Gizi Lebih</option>
+                  <option value="gizi_lebih">Gizi Lebih (Overweight)</option>
+                  <option value="obesitas">Obesitas</option>
+                </select>
+              </div>
+              <div class="status-badge-preview" id="badge-imtu"></div>
+            </div>
+          </div>
+
+          <button class="btn-check" id="btn-check">Periksa Sekarang</button>
+        </div>
+
+        <div class="result-panel" id="result">
+          <div class="result-badge" id="result-badge"></div>
+          <div class="result-title" id="result-title"></div>
+          <div class="result-desc" id="result-desc"></div>
+
+          <div class="zscore-row" id="zscore-row" style="display: none">
+            <div class="zscore-item">
+              <div class="zscore-label">Z-score TB/U</div>
+              <div class="zscore-value" id="zscore-tb-val"></div>
+              <div class="zscore-kategori" id="zscore-tb-kat"></div>
+            </div>
+            <div class="zscore-item">
+              <div class="zscore-label">Z-score BB/U</div>
+              <div class="zscore-value" id="zscore-bb-val"></div>
+              <div class="zscore-kategori" id="zscore-bb-kat"></div>
+            </div>
+          </div>
+
+          <div class="status-gizi-grid" id="status-gizi-grid" style="display: none">
+            <div class="status-gizi-item">
+              <div class="sgi-label">TB/U (Permenkes 2020)</div>
+              <div class="sgi-value" id="sgi-tbu"></div>
+            </div>
+            <div class="status-gizi-item">
+              <div class="sgi-label">BB/U (Permenkes 2020)</div>
+              <div class="sgi-value" id="sgi-bbu"></div>
+            </div>
+            <div class="status-gizi-item" id="sgi-bbtb-wrap" style="display: none">
+              <div class="sgi-label">BB/TB (Otomatis)</div>
+              <div class="sgi-value" id="sgi-bbtb"></div>
+            </div>
+            <div class="status-gizi-item" id="sgi-imtu-wrap" style="display: none">
+              <div class="sgi-label">IMT/U (Otomatis)</div>
+              <div class="sgi-value" id="sgi-imtu"></div>
+            </div>
+          </div>
+          <div class="result-action" id="result-action"></div>
+        </div>
+
+        <div class="rekom-panel" id="rekom-panel">
+          <div class="rekom-header">
+            <div class="rekom-header-icon">📋</div>
+            <div>
+              <div class="rekom-header-title">Rekomendasi Tindak Lanjut</div>
+              <div class="rekom-header-sub">Berdasarkan hasil penilaian Fuzzy Mamdani & Permenkes No. 2/2020</div>
+            </div>
+          </div>
+          <div class="rekom-tabs" id="rekom-tabs-container">
+            <button class="rekom-tab active" data-tab="tindakan">⚡ Tindakan Segera</button>
+            <button class="rekom-tab" data-tab="makan">🥗 Pola Makan</button>
+            <button class="rekom-tab" data-tab="pantau">📊 Pemantauan</button>
+            <button class="rekom-tab" data-tab="dokter">🏥 Kapan ke Dokter</button>
+          </div>
+          <div class="rekom-body">
+            <div class="rekom-content active" id="tab-tindakan"><ul class="rekom-list" id="list-tindakan"></ul></div>
+            <div class="rekom-content" id="tab-makan"><ul class="rekom-list" id="list-makan"></ul></div>
+            <div class="rekom-content" id="tab-pantau"><ul class="rekom-list" id="list-pantau"></ul></div>
+            <div class="rekom-content" id="tab-dokter"><ul class="rekom-list" id="list-dokter"></ul></div>
+            <div class="catatan-box" id="catatan-box" style="display: none">
+              <div class="catatan-label">⚠ Catatan Khusus</div>
+              <div id="catatan-content"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ai-panel" id="ai-panel">
+          <div class="ai-header">
+            <div class="ai-dot"></div>
+            <div class="ai-label">Analisis AI — Konselor Gizi Virtual</div>
+          </div>
+          <div class="ai-loading" id="ai-loading">
+            <div class="ai-spinner"></div>
+            <span>Menganalisis kondisi anak dan menyiapkan penjelasan…</span>
+          </div>
+          <div id="ai-content" style="display: none">
+            <div class="ai-section">
+              <div class="ai-section-label">Penjelasan Kondisi & Saran Utama</div>
+              <div class="ai-section-text" id="ai-kondisi"></div>
+            </div>
+            <div class="ai-section" style="margin-top: 1.5rem; text-align: right;">
+              <a href="/chat" class="btn-primary" style="background: var(--green-soft); color: var(--green-dark); font-size: 0.88rem; padding: 10px 20px;">💬 Tanya Jawab Lebih Lanjut via Live Chat</a>
+            </div>
+          </div>
+          <div class="ai-error" id="ai-error" style="display: none">Analisis AI tidak tersedia saat ini. Gunakan rekomendasi di atas sebagai panduan.</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/checker.js') }}"></script>
+  </body>
+</html>

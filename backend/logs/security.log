@@ -1,0 +1,259 @@
+2026-06-10 20:02:58,873 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:02:58,873 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 20:02:58,886 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 20:02:59,644 [WARNING] IP:  * Debugger is active!
+2026-06-10 20:02:59,651 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 20:03:16,756 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:03:16,756 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 20:03:16,768 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 20:03:17,454 [WARNING] IP:  * Debugger is active!
+2026-06-10 20:03:17,454 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 20:03:57,163 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:03:57] "GET / HTTP/1.1" 200 -
+2026-06-10 20:03:57,329 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:03:57] "GET /static/js/checker.js HTTP/1.1" 200 -
+2026-06-10 20:03:57,329 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:03:57] "GET /static/css/main.css HTTP/1.1" 200 -
+2026-06-10 20:03:57,452 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:03:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-10 20:11:54,504 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:54] "GET / HTTP/1.1" 200 -
+2026-06-10 20:11:54,519 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:54] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:11:54,519 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:54] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:11:55,901 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:55] "GET / HTTP/1.1" 200 -
+2026-06-10 20:11:55,912 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:11:55,913 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:11:55] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:12:15,533 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:12:15] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:18:16,699 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:16] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:18:24,308 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:24] "GET / HTTP/1.1" 200 -
+2026-06-10 20:18:24,322 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:24] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:18:24,323 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:24] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:18:25,497 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:25] "GET / HTTP/1.1" 200 -
+2026-06-10 20:18:25,511 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:25] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:18:25,511 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:18:25] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:25:02,041 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:25:02,041 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 20:25:02,056 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 20:25:02,719 [WARNING] IP:  * Debugger is active!
+2026-06-10 20:25:02,719 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 20:25:09,600 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:25:09] "GET / HTTP/1.1" 200 -
+2026-06-10 20:42:50,798 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:42:50,798 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 20:42:50,809 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 20:42:51,453 [WARNING] IP:  * Debugger is active!
+2026-06-10 20:42:51,453 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 20:42:57,215 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:42:57] "GET / HTTP/1.1" 200 -
+2026-06-10 20:42:57,356 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:42:57] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:42:57,391 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:42:57] "GET /static/css/main.css HTTP/1.1" 200 -
+2026-06-10 20:43:10,174 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:43:10] "GET /chat HTTP/1.1" 200 -
+2026-06-10 20:43:10,185 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:43:10] "GET /static/js/chat.js HTTP/1.1" 200 -
+2026-06-10 20:43:10,202 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:43:10] "GET /static/css/chat.css HTTP/1.1" 200 -
+2026-06-10 20:49:22,731 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:22] "POST /api/chat HTTP/1.1" 200 -
+2026-06-10 20:49:29,557 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:29] "GET / HTTP/1.1" 200 -
+2026-06-10 20:49:29,569 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:29] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:49:29,570 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:29] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:49:47,574 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:47] "POST /cek HTTP/1.1" 200 -
+2026-06-10 20:49:55,764 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:55] "GET /chat HTTP/1.1" 200 -
+2026-06-10 20:49:55,791 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:55] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+2026-06-10 20:49:55,796 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:49:55] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+2026-06-10 20:50:07,463 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:07] "POST /api/chat HTTP/1.1" 200 -
+2026-06-10 20:50:15,868 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:15] "POST /api/chat HTTP/1.1" 200 -
+2026-06-10 20:50:29,081 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:29] "POST /api/chat HTTP/1.1" 200 -
+2026-06-10 20:50:42,700 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:42] "GET / HTTP/1.1" 200 -
+2026-06-10 20:50:42,715 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:42] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 20:50:42,721 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:50:42] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:59:50,978 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 20:59:50,978 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 20:59:50,991 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 20:59:51,678 [WARNING] IP:  * Debugger is active!
+2026-06-10 20:59:51,678 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 20:59:56,807 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:59:56] "GET / HTTP/1.1" 200 -
+2026-06-10 20:59:56,940 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:59:56] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 20:59:56,941 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 20:59:56] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 21:00:05,870 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:00:05] "GET /login HTTP/1.1" 200 -
+2026-06-10 21:06:41,239 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 21:06:41,239 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 21:06:41,241 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 21:06:42,040 [WARNING] IP:  * Debugger is active!
+2026-06-10 21:06:42,043 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 21:06:47,704 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:06:47] "GET /login HTTP/1.1" 200 -
+2026-06-10 21:06:47,852 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:06:47] "GET /static/css/auth.css HTTP/1.1" 200 -
+2026-06-10 21:06:55,742 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:06:55] "GET /register HTTP/1.1" 200 -
+2026-06-10 21:06:55,748 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:06:55] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 21:07:01,868 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:07:01] "GET / HTTP/1.1" 200 -
+2026-06-10 21:07:01,875 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:07:01] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-10 21:07:01,880 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:07:01] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-10 21:07:09,320 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:07:09] "GET /login HTTP/1.1" 200 -
+2026-06-10 21:07:09,336 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:07:09] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 21:09:47,281 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:09:47] "GET /register HTTP/1.1" 200 -
+2026-06-10 21:09:47,290 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:09:47] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 21:09:49,730 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:09:49] "GET /login HTTP/1.1" 200 -
+2026-06-10 21:09:49,738 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 21:09:49] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:44:26,654 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 22:44:26,654 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 22:44:26,671 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 22:44:27,424 [WARNING] IP:  * Debugger is active!
+2026-06-10 22:44:27,424 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 22:45:06,325 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:06] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-10 22:45:06,350 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:06] "GET /login HTTP/1.1" 200 -
+2026-06-10 22:45:06,546 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:06] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:45:06,632 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-10 22:45:52,895 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:52] "GET /register HTTP/1.1" 200 -
+2026-06-10 22:45:52,913 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:52] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:45:55,621 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:55] "GET /login HTTP/1.1" 200 -
+2026-06-10 22:45:55,630 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:55] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:45:57,136 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:57] "GET /register HTTP/1.1" 200 -
+2026-06-10 22:45:57,146 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:57] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:45:58,812 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:58] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-10 22:45:58,820 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:58] "GET /login HTTP/1.1" 200 -
+2026-06-10 22:45:58,844 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:45:58] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:46:04,036 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:46:04] "GET /register HTTP/1.1" 200 -
+2026-06-10 22:46:04,049 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:46:04] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:46:07,640 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:46:07] "GET /login HTTP/1.1" 200 -
+2026-06-10 22:46:07,650 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:46:07] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:47:03,210 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:03] "GET /register HTTP/1.1" 200 -
+2026-06-10 22:47:03,223 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:03] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:47:27,348 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:27] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:33,079 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:33] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:35,297 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:35] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:37,941 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:37] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:38,365 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:38] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:38,598 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:38] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:40,664 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:40] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:45,495 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:45] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:45,702 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:45] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:47,153 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:47] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:47,370 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:47] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:47:52,596 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:52] "GET /register HTTP/1.1" 200 -
+2026-06-10 22:47:52,621 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:47:52] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:48:09,043 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:48:09] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:54:46,717 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:54:46] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 22:54:46,754 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:54:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-10 22:54:51,274 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:54:51] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 22:58:06,988 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 22:58:06] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-10 23:13:13,653 [INFO] IP:  * Detected change in 'C:\\semester6\\TUBES_SISPAK\\sistem-pakar-stunting-fuzzy\\backend\\routes\\auth_routes.py', reloading
+2026-06-10 23:13:13,780 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 23:13:14,618 [WARNING] IP:  * Debugger is active!
+2026-06-10 23:13:14,618 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 23:13:42,719 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-10 23:13:42,719 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-10 23:13:42,730 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-10 23:13:43,298 [WARNING] IP:  * Debugger is active!
+2026-06-10 23:13:43,299 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-10 23:13:59,446 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 23:13:59] "GET /register HTTP/1.1" 200 -
+2026-06-10 23:13:59,499 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 23:13:59] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-10 23:13:59,553 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 23:13:59] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-10 23:14:24,479 [INFO] IP: 127.0.0.1 - - [10/Jun/2026 23:14:24] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-11 05:57:38,011 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-11 05:57:38,011 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-11 05:57:38,025 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-11 05:57:38,596 [WARNING] IP:  * Debugger is active!
+2026-06-11 05:57:38,599 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-11 05:58:27,626 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:27] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-11 05:58:27,647 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:27] "GET /login HTTP/1.1" 200 -
+2026-06-11 05:58:27,763 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:27] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 05:58:27,835 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-11 05:58:31,748 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:31] "GET /register HTTP/1.1" 200 -
+2026-06-11 05:58:31,759 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:31] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 05:58:44,954 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:44] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 05:58:45,035 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:58:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 05:59:12,065 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 05:59:12] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-11 06:06:27,958 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:06:27] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-11 06:06:27,966 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:06:27] "GET /login HTTP/1.1" 200 -
+2026-06-11 06:06:27,978 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:06:27] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:06:28,032 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:06:28] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:07:43,442 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:07:43] "GET /register HTTP/1.1" 200 -
+2026-06-11 06:07:43,455 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:07:43] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:07:43,493 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:07:43] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:08:02,302 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:08:02] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-11 06:08:03,905 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:08:03] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-11 06:08:04,728 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:08:04] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+2026-06-11 06:23:37,217 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-11 06:23:37,217 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-11 06:23:37,232 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-11 06:23:37,815 [WARNING] IP:  * Debugger is active!
+2026-06-11 06:23:37,815 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-11 06:23:45,645 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:23:45] "GET /register HTTP/1.1" 200 -
+2026-06-11 06:23:45,689 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:23:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:23:45,876 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:23:45] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:24:04,168 [WARNING] IP: 127.0.0.1 - UID: 1 - Action: User baru terdaftar: asri tanisha rumapea - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:24:04,186 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:04] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-06-11 06:24:12,373 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:12] "GET /login HTTP/1.1" 200 -
+2026-06-11 06:24:12,390 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:12] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:24:12,403 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:24:54,584 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:54] "GET /register HTTP/1.1" 200 -
+2026-06-11 06:24:54,597 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:54] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:24:54,624 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:24:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:25:21,262 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: User baru terdaftar: asri tanisha - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:25:21,278 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:21] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+2026-06-11 06:25:23,338 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:23] "GET /login HTTP/1.1" 200 -
+2026-06-11 06:25:23,351 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:23] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:25:23,366 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:23] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:25:41,263 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: Login berhasil (asri tanisha) - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:25:41,279 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:41] "POST /login HTTP/1.1" 200 -
+2026-06-11 06:25:46,352 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:46] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:25:46,388 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:46] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:25:46,390 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:46] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:25:46,391 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:25:46] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:29:39,020 [INFO] IP: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-11 06:29:39,020 [INFO] IP: [33mPress CTRL+C to quit[0m
+2026-06-11 06:29:39,032 [INFO] IP:  * Restarting with watchdog (windowsapi)
+2026-06-11 06:29:39,637 [WARNING] IP:  * Debugger is active!
+2026-06-11 06:29:39,637 [INFO] IP:  * Debugger PIN: 991-443-232
+2026-06-11 06:29:45,919 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:45] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:29:45,954 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:29:46,082 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:46] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:29:46,082 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:46] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:29:48,564 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:48] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:29:48,585 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:48] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:29:48,585 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:48] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:29:48,608 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:48] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:29:54,323 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:54] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-11 06:29:54,331 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:54] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:29:54,358 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:54] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:29:54,358 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:54] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:29:54,376 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:29:54] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:06,417 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:06] "[32mGET / HTTP/1.1[0m" 302 -
+2026-06-11 06:30:06,423 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:06] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:30:06,448 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:06] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:06,449 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:06] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:30:06,464 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:06] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:12,403 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: Logout user: asri tanisha - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:30:12,430 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:12] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-06-11 06:30:12,612 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:12] "GET /login HTTP/1.1" 200 -
+2026-06-11 06:30:12,658 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:12] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:12,680 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:12] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:19,589 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: Login berhasil (asri tanisha) - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:30:19,602 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:19] "POST /login HTTP/1.1" 200 -
+2026-06-11 06:30:22,480 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:22] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:30:22,498 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:22] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:22,499 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:22] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:30:22,520 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:22] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:33,530 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:33] "GET /dashboard HTTP/1.1" 200 -
+2026-06-11 06:30:33,562 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:43,792 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:43] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:30:43,809 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:43] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:43,813 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:43] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:30:43,829 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:43] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:45,959 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:45] "GET /chat HTTP/1.1" 200 -
+2026-06-11 06:30:45,975 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:45] "[36mGET /static/css/chat.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:45,976 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:45] "[36mGET /static/js/chat.js HTTP/1.1[0m" 304 -
+2026-06-11 06:30:45,993 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:45] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:49,931 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: Logout user: asri tanisha - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:30:49,939 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:49] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-06-11 06:30:49,945 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:49] "GET /login HTTP/1.1" 200 -
+2026-06-11 06:30:49,957 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:49] "[36mGET /static/css/auth.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:49,973 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:49] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:30:54,017 [WARNING] IP: 127.0.0.1 - UID: 2 - Action: Login berhasil (asri tanisha) - Severity: INFO - UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+2026-06-11 06:30:54,022 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:54] "POST /login HTTP/1.1" 200 -
+2026-06-11 06:30:55,510 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:55] "GET /index HTTP/1.1" 200 -
+2026-06-11 06:30:55,525 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:55] "[36mGET /static/css/main.css HTTP/1.1[0m" 304 -
+2026-06-11 06:30:55,526 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:55] "[36mGET /static/js/checker.js HTTP/1.1[0m" 304 -
+2026-06-11 06:30:55,547 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:30:55] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-06-11 06:31:23,078 [INFO] IP: 127.0.0.1 - - [11/Jun/2026 06:31:23] "POST /cek HTTP/1.1" 200 -

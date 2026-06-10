@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TumbuhCerah — Konsultasi AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-name">Tumbuh<em>Cerah</em></div>
+          <div class="logo-sub">Konsultasi Gizi Anak · AI</div>
+        </div>
+
+        <button class="btn-new-chat" id="btn-new-chat">
+          <span class="icon">✦</span> Chat Baru
+        </button>
+
+        <div class="sidebar-section-label">Pertanyaan Umum</div>
+        <div class="suggested-list" id="sidebar-suggestions">
+          <button class="suggest-btn">Apa itu stunting dan apa penyebab utamanya?</button>
+          <button class="suggest-btn">Makanan apa yang paling efektif mencegah stunting?</button>
+          <button class="suggest-btn">Apa tanda-tanda awal anak berisiko stunting?</button>
+          <button class="suggest-btn">Bagaimana cara membaca Z-score anak saya?</button>
+          <button class="suggest-btn">Kapan MPASI sebaiknya dimulai?</button>
+          <button class="suggest-btn">Berapa kebutuhan gizi anak usia 1–2 tahun?</button>
+        </div>
+
+        <div class="sidebar-spacer"></div>
+        <a href="/dashboard" class="sidebar-back">📊 Dashboard Saya</a>
+        <a href="/logout" class="sidebar-back">🚪 Logout</a>
+        <div class="sidebar-disclaimer">
+          🛡 Konsultasi ini bersifat edukatif. Bukan pengganti diagnosis dokter. Selalu konsultasi ke tenaga kesehatan untuk penanganan medis.
+        </div>
+        <a href="/index" class="sidebar-back">← Kembali ke Beranda</a>
+      </aside>
+
+      <main class="main">
+        <header class="chat-header">
+          <div class="ai-avatar">🌿</div>
+          <div class="ai-info">
+            <div class="ai-name">Konselor Gizi TumbuhCerah</div>
+            <div class="ai-status">
+              <span class="status-dot"></span>Siap membantu konsultasi stunting & gizi anak
+            </div>
+          </div>
+        </header>
+
+        <div class="messages" id="messages-box">
+          <div class="welcome-state" id="welcome-state">
+            <div class="welcome-icon">🌿</div>
+            <div class="welcome-title">Halo, ada yang bisa<br><em>aku bantu?</em></div>
+            <div class="welcome-desc">Tanyakan apa saja seputar stunting, gizi anak, MPASI, tumbuh kembang, atau interpretasi hasil pemeriksaan anakmu.</div>
+            <div class="welcome-chips" id="welcome-chips-container">
+              <div class="chip">Apa itu stunting?</div>
+              <div class="chip">Ciri-ciri anak stunting</div>
+              <div class="chip">Makanan pencegah stunting</div>
+              <div class="chip">Cara baca Z-score</div>
+              <div class="chip">MPASI untuk bayi 6 bulan</div>
+              <div class="chip">Jadwal posyandu anak</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-area">
+          <div class="input-wrap">
+            <textarea id="chat-input" placeholder="Tanyakan seputar stunting, gizi, atau tumbuh kembang anak…" rows="1"></textarea>
+            <button class="btn-send" id="btn-send" title="Kirim">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+          </div>
+          <div class="input-hint">Enter untuk kirim · Shift+Enter untuk baris baru</div>
+        </div>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  </body>
+</html>
