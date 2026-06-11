@@ -196,9 +196,11 @@
       this.textContent = 'Memproses...';
       this.disabled = true;
 
+      let res;
       try {
-        const res = await fetch('/cek', {
+        res = await fetch('/cek', {
           method: 'POST',
+          credentials: 'include',
           body: formData
         });
 
@@ -209,7 +211,8 @@
           pesan += `Status: ${data.fuzzy.status}\n`;
           pesan += `Z-Score TB/U: ${data.z_tb}\n`;
           pesan += `Z-Score BB/U: ${data.z_bb}\n`;
-          pesan += `\n📋 Rekomendasi:\n${data.rekomendasi.join('\n')}`;
+          pesan += `\n📋 Tindakan Segera:\n${(data.rekomendasi.tindakan_segera||[]).join('\n')}`;
+          pesan += `\n\n🍽 Pola Makan:\n${(data.rekomendasi.pola_makan||[]).join('\n')}`;
           if (data.foto_url) {
             pesan += `\n\n📷 Foto tersimpan di Azure:\n${data.foto_url}`;
           }
@@ -219,7 +222,7 @@
         }
 
       } catch(e) {
-        alert('Gagal terhubung ke server');
+        alert('Error: ' + e.message + ' | status: ' + (res ? res.status : 'no response'));
       }
 
       this.textContent = '🔍 Cek Stunting';

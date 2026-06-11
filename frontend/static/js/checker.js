@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
         dokter: { icon: "✚", cls: "rekom-icon-dokter" },
     };
 
-    // Auto-calculating listener untuk form input dinamis
     ['usia', 'tb_cm', 'bb_kg'].forEach(id => {
         document.getElementById(id).addEventListener("input", autoInterceptForm);
     });
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("status_imtu").addEventListener("change", () => updateStatusBadge('imtu'));
     document.getElementById("btn-check").addEventListener("click", cekStuntingExecution);
 
-    // Bind event tabs tanpa inline handler
     document.querySelectorAll(".rekom-tab").forEach(tab => {
         tab.addEventListener("click", (e) => {
             switchTab(e.target.getAttribute("data-tab"));
@@ -129,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const resp = await fetch("/cek", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                credentials: "include",
                 body: JSON.stringify({ usia, jk, tb_cm: tbCm, bb_kg: bbKg }),
             });
 
