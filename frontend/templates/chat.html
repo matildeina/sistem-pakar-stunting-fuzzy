@@ -6,6 +6,67 @@
     <title>TumbuhCerah — Konsultasi AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}" />
+
+    <style>
+    .cek-form {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      border: 1px solid #e0e0e0;
+    }
+    .form-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .form-row input,
+    .form-row select {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .form-row input:focus,
+    .form-row select:focus {
+      border-color: #3d7a5e;
+    }
+    .upload-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px dashed #3d7a5e;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #3d7a5e;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .upload-label:hover {
+      background: #f0f7f4;
+    }
+    .btn-cek {
+      width: 100%;
+      padding: 10px;
+      background: #3d7a5e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+    .btn-cek:hover { opacity: 0.85; }
+    .btn-cek:disabled { opacity: 0.6; cursor: not-allowed; }
+    </style>
   </head>
   <body>
     <div class="app">
@@ -66,6 +127,30 @@
         </div>
 
         <div class="input-area">
+
+          <!-- Form Cek Stunting -->
+          <div class="cek-form" id="cek-form">
+            <div class="form-row">
+              <input type="number" id="usia" placeholder="Usia (bulan)" min="0" max="60">
+              <select id="jk">
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <input type="number" id="tb_cm" placeholder="Tinggi (cm)" step="0.1">
+              <input type="number" id="bb_kg" placeholder="Berat (kg)" step="0.1">
+            </div>
+            <div class="form-row">
+              <label class="upload-label" for="foto-anak">
+                📷 Foto Anak (opsional)
+                <input type="file" id="foto-anak" accept="image/png,image/jpg,image/jpeg" style="display:none">
+              </label>
+              <span id="foto-name" style="font-size:0.8rem;color:#888;align-self:center;">Belum ada foto</span>
+            </div>
+            <button class="btn-cek" id="btn-cek">🔍 Cek Stunting</button>
+          </div>
+
           <div class="input-wrap">
             <textarea id="chat-input" placeholder="Tanyakan seputar stunting, gizi, atau tumbuh kembang anak…" rows="1"></textarea>
             <button class="btn-send" id="btn-send" title="Kirim">
@@ -73,10 +158,74 @@
             </button>
           </div>
           <div class="input-hint">Enter untuk kirim · Shift+Enter untuk baris baru</div>
+
         </div>
       </main>
     </div>
 
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+    <script>
+    // Preview nama file yang dipilih
+    document.getElementById('foto-anak').addEventListener('change', function() {
+      const file = this.files[0];
+      document.getElementById('foto-name').textContent = file ? file.name : 'Belum ada foto';
+    });
+
+    // Tombol Cek Stunting
+    document.getElementById('btn-cek').addEventListener('click', async function() {
+      const usia  = document.getElementById('usia').value;
+      const jk    = document.getElementById('jk').value;
+      const tb_cm = document.getElementById('tb_cm').value;
+      const bb_kg = document.getElementById('bb_kg').value;
+      const foto  = document.getElementById('foto-anak').files[0];
+
+      if (!usia || !tb_cm || !bb_kg) {
+        alert('Usia, tinggi, dan berat wajib diisi!');
+        return;
+      }
+
+      // Pakai FormData supaya bisa kirim file
+      const formData = new FormData();
+      formData.append('usia', usia);
+      formData.append('jk', jk);
+      formData.append('tb_cm', tb_cm);
+      formData.append('bb_kg', bb_kg);
+      if (foto) formData.append('foto', foto);
+
+      this.textContent = 'Memproses...';
+      this.disabled = true;
+
+      try {
+        const res = await fetch('/cek', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          let pesan = `✅ Hasil Pemeriksaan:\n`;
+          pesan += `Status: ${data.fuzzy.status}\n`;
+          pesan += `Z-Score TB/U: ${data.z_tb}\n`;
+          pesan += `Z-Score BB/U: ${data.z_bb}\n`;
+          pesan += `\n📋 Rekomendasi:\n${data.rekomendasi.join('\n')}`;
+          if (data.foto_url) {
+            pesan += `\n\n📷 Foto tersimpan di Azure:\n${data.foto_url}`;
+          }
+          alert(pesan);
+        } else {
+          alert('Error: ' + data.error);
+        }
+
+      } catch(e) {
+        alert('Gagal terhubung ke server');
+      }
+
+      this.textContent = '🔍 Cek Stunting';
+      this.disabled = false;
+    });
+    </script>
+
   </body>
 </html>

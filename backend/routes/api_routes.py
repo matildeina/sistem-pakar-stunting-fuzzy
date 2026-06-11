@@ -147,25 +147,23 @@ def dashboard():
 @login_required
 def cek_stunting():
 
-    data = request.get_json() or {}
+    # Ambil data — bisa JSON atau form-data (karena ada file upload)
+    if request.content_type and 'multipart/form-data' in request.content_type:
+        data = request.form
+    else:
+        data = request.get_json() or {}
 
     try:
-
         usia = int(data.get("usia", 0))
         jk = str(data.get("jk", "L"))
-
         tb_cm = float(data.get("tb_cm", 0))
         bb_kg = float(data.get("bb_kg", 0))
 
         if usia < 0 or usia > 60:
-            return jsonify({
-                "error": "Usia harus 0-60 bulan"
-            }), 400
+            return jsonify({"error": "Usia harus 0-60 bulan"}), 400
 
         if tb_cm <= 0 or bb_kg <= 0:
-            return jsonify({
-                "error": "TB dan BB harus lebih dari 0"
-            }), 400
+            return jsonify({"error": "TB dan BB harus lebih dari 0"}), 400
 
         tbl_tb = WHO_TB_L if jk == "L" else WHO_TB_P
         tbl_bb = WHO_BB_L if jk == "L" else WHO_BB_P
@@ -186,10 +184,7 @@ def cek_stunting():
         rekomendasi, catatan = buat_rekomendasi(
             hasil_fuzzy["status"],
             status_gizi,
-            z_tb,
-            z_bb,
-            usia,
-            jk
+            z_tb, z_bb, usia, jk
         )
 
         analisis_ai = (
@@ -199,6 +194,18 @@ def cek_stunting():
             f"memiliki status {hasil_fuzzy['status']}."
         )
 
+        # ── Upload foto ke Azure jika ada ──
+        foto_url = None
+        if 'foto' in request.files:
+            foto = request.files['foto']
+            if foto and foto.filename:
+                try:
+                    from services.azure_service import upload_foto_anak
+                    foto_url = upload_foto_anak(foto)
+                except Exception as e:
+                    # Gagal upload foto tidak menghentikan konsultasi
+                    print(f"Warning upload foto: {e}")
+
         # Simpan ke database
         history = ConsultationHistory(
             user_id=session["user_id"],
@@ -207,7 +214,8 @@ def cek_stunting():
             tinggi_badan=tb_cm,
             berat_badan=bb_kg,
             status_fuzzy=hasil_fuzzy["status"],
-            skor_fuzzy=hasil_fuzzy["skor"]
+            skor_fuzzy=hasil_fuzzy["skor"],
+            foto_url=foto_url  # ← tambah ini
         )
 
         db.session.add(history)
@@ -220,13 +228,12 @@ def cek_stunting():
             "fuzzy": hasil_fuzzy,
             "rekomendasi": rekomendasi,
             "catatan_tambahan": catatan,
-            "analisis_ai": analisis_ai
+            "analisis_ai": analisis_ai,
+            "foto_url": foto_url  # ← tambah ini
         })
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 400
+        return jsonify({"error": str(e)}), 400
 
 # ==================================================
 # CHATBOT

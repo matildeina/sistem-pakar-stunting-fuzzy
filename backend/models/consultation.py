@@ -12,4 +12,5 @@ class ConsultationHistory(db.Model):
     berat_badan = db.Column(db.Float, nullable=False)
     status_fuzzy = db.Column(db.String(50), nullable=False)
     skor_fuzzy = db.Column(db.Float, nullable=False)
+    foto_url = db.Column(db.String(500), nullable=True)  # ← tambah ini
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
