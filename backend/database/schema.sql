@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS consultation_history (
     berat_badan DECIMAL(5,2) NOT NULL,
     status_fuzzy VARCHAR(50) NOT NULL,
     skor_fuzzy DECIMAL(5,4) NOT NULL,
+    foto_url VARCHAR(500) NULL COMMENT 'URL foto anak di Azure Blob Storage',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
