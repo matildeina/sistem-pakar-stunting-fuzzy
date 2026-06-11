@@ -144,6 +144,7 @@ def dashboard():
 
 @api_bp.route("/cek", methods=["POST"])
 @csrf.exempt
+@limiter.limit("10 per minute")  # ← tambah ini
 @login_required
 def cek_stunting():
 
@@ -203,7 +204,6 @@ def cek_stunting():
                     from services.azure_service import upload_foto_anak
                     foto_url = upload_foto_anak(foto)
                 except Exception as e:
-                    # Gagal upload foto tidak menghentikan konsultasi
                     print(f"Warning upload foto: {e}")
 
         # Simpan ke database
@@ -215,7 +215,7 @@ def cek_stunting():
             berat_badan=bb_kg,
             status_fuzzy=hasil_fuzzy["status"],
             skor_fuzzy=hasil_fuzzy["skor"],
-            foto_url=foto_url  # ← tambah ini
+            foto_url=foto_url
         )
 
         db.session.add(history)
@@ -229,11 +229,12 @@ def cek_stunting():
             "rekomendasi": rekomendasi,
             "catatan_tambahan": catatan,
             "analisis_ai": analisis_ai,
-            "foto_url": foto_url  # ← tambah ini
+            "foto_url": foto_url
         })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 
 # ==================================================
 # CHATBOT
@@ -266,59 +267,26 @@ def api_chat():
 
         jawaban_ai = None
 
-        # =====================
-        # Parsing data anak
-        # =====================
-
-        match_usia = re.search(
-            r'(\d+)\s*(bulan|bln)',
-            pesan_clean
-        )
-
-        match_tb = re.search(
-            r'(tinggi|tb)\s*(\d+)',
-            pesan_clean
-        )
-
-        match_bb = re.search(
-            r'(berat|bb)\s*(\d+)',
-            pesan_clean
-        )
+        match_usia = re.search(r'(\d+)\s*(bulan|bln)', pesan_clean)
+        match_tb = re.search(r'(tinggi|tb)\s*(\d+)', pesan_clean)
+        match_bb = re.search(r'(berat|bb)\s*(\d+)', pesan_clean)
 
         if match_tb:
             session["last_tb"] = float(match_tb.group(2))
-
         if match_bb:
             session["last_bb"] = float(match_bb.group(2))
-
         if match_usia:
             session["last_usia"] = int(match_usia.group(1))
-
-        # =====================
-        # Rule sederhana
-        # =====================
 
         if has_any(["halo", "hai"], pesan_clean):
             jawaban_ai = (
                 "Halo Ayah/Bunda 🌿 "
                 "Ada yang bisa saya bantu terkait stunting?"
             )
-
-        elif has_any(
-            ["ciri", "tanda", "gejala"],
-            pesan_clean
-        ):
-            jawaban_ai = dapatkan_jawaban_kamus(
-                "ciri stunting"
-            )
-
-        elif has_any(
-            ["cegah", "pencegahan"],
-            pesan_clean
-        ):
-            jawaban_ai = dapatkan_jawaban_kamus(
-                "cegah stunting"
-            )
+        elif has_any(["ciri", "tanda", "gejala"], pesan_clean):
+            jawaban_ai = dapatkan_jawaban_kamus("ciri stunting")
+        elif has_any(["cegah", "pencegahan"], pesan_clean):
+            jawaban_ai = dapatkan_jawaban_kamus("cegah stunting")
 
         if not jawaban_ai:
             jawaban_ai = (
@@ -333,6 +301,4 @@ def api_chat():
         })
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
+        return jsonify({"error": str(e)}), 500
