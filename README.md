@@ -1,268 +1,215 @@
-# 🌿 TumbuhCerah — Sistem Deteksi Stunting Berbasis Logika Fuzzy Mamdani
+# 🌿 TumbuhCerah — Sistem Deteksi Stunting Berbasis Fuzzy Mamdani
 
-> Aplikasi web edukasi dan deteksi dini stunting pada anak usia 0–60 bulan menggunakan metode **Fuzzy Mamdani** dengan standar antropometri **WHO Child Growth Standards**.
+> Aplikasi web deteksi dini stunting pada anak usia 0–60 bulan menggunakan **Fuzzy Mamdani**, standar antropometri **WHO**, dan arsitektur **Cloud Native** (AWS + Azure).
 
 ---
 
 ## 📋 Deskripsi
 
-**TumbuhCerah** adalah aplikasi berbasis Flask yang membantu orang tua, kader posyandu, dan tenaga kesehatan melakukan **skrining awal risiko stunting** secara cepat dan mudah. Sistem menerima input berupa tinggi badan, berat badan, usia, dan jenis kelamin anak, lalu menghitung Z-score berdasarkan tabel WHO dan menjalankan inferensi Fuzzy Mamdani untuk menghasilkan keputusan: **Stunting**, **Risiko Stunting**, atau **Normal**.
+**TumbuhCerah** adalah aplikasi berbasis Flask yang membantu orang tua, kader posyandu, dan tenaga kesehatan melakukan **skrining awal risiko stunting** secara cepat dan mudah. Sistem menerima input berupa tinggi badan, berat badan, usia, jenis kelamin, dan foto anak, lalu menghitung Z-score berdasarkan tabel WHO dan menjalankan inferensi Fuzzy Mamdani untuk menghasilkan keputusan: **Stunting**, **Risiko Stunting**, atau **Normal**.
 
-Selain deteksi, aplikasi juga menyajikan konten edukasi lengkap tentang stunting — definisi, penyebab, tanda-tanda, dan langkah pencegahan — agar orang tua memahami konteks di balik hasil pemeriksaan.
+Foto anak disimpan secara aman di **Azure Blob Storage** sebagai bagian dari arsitektur multi-cloud.
 
 ---
 
 ## ✨ Fitur Utama
 
-- **Kalkulator Z-score otomatis** — menggunakan tabel median dan standar deviasi WHO 0–60 bulan untuk laki-laki dan perempuan
+- **Kalkulator Z-score otomatis** — tabel median dan SD WHO 0–60 bulan untuk laki-laki dan perempuan
 - **Inferensi Fuzzy Mamdani** — 6 himpunan fuzzy, 6 rule base, agregasi MAX-MIN, defuzzifikasi weighted average
-- **Penjelasan AI** — hasil deteksi diperkaya dengan penjelasan kontekstual dari Claude API (Anthropic) dalam bahasa Indonesia yang ramah orang tua
-- **Halaman edukasi** — informasi tentang stunting, penyebab, tanda, dan pencegahan berbasis 1.000 HPK
-- **Poster informatif** — poster HTML lengkap berisi seluruh informasi logika fuzzy dan edukasi stunting
-- **Responsif** — tampilan optimal di desktop maupun mobile
+- **Upload foto anak** — tersimpan di Azure Blob Storage (multi-cloud)
+- **Chatbot NLP** — menggunakan Sastrawi stemmer untuk memproses pertanyaan bahasa Indonesia
+- **Autentikasi aman** — register, login, logout dengan session management
+- **Dashboard riwayat** — histori konsultasi per user
+- **Security hardening** — CSRF, bcrypt, rate limiting, XSS filter, SQL injection protection
 
 ---
 
-## 🗂️ Struktur Proyek
-
-```
-stunting/
-├── app.py                  # Backend Flask + logika fuzzy + tabel WHO
-└── templates/
-    └── index.html          # Frontend: edukasi + form + hasil + AI explanation
-```
+## 🏗️ Arsitektur Cloud
 
 ---
 
-## ⚙️ Instalasi & Menjalankan
+## ⚙️ Instalasi Lokal
 
 ### Prasyarat
-
-- Python 3.8+
-- pip
+- Python 3.11+
+- Docker & Docker Compose
+- Git
 
 ### Langkah
 
 ```bash
 # 1. Clone repositori
-git clone https://github.com/username/tumbuhcerah.git
-cd tumbuhcerah
+git clone https://github.com/matildeina/sistem-pakar-stunting-fuzzy.git
+cd sistem-pakar-stunting-fuzzy
 
-# 2. Buat virtual environment (opsional tapi disarankan)
-python -m venv venv
-source venv/bin/activate        # Linux/Mac
-venv\Scripts\activate           # Windows
+# 2. Buat file .env
+cp .env.example .env
+# Edit .env sesuai konfigurasi lokal
 
-# 3. Install dependensi
-pip install flask
+# 3. Jalankan dengan Docker
+cd docker
+docker compose up -d --build
 
-# 4. Jalankan aplikasi
+# 4. Akses aplikasi
+# Buka browser: http://localhost
+```
+
+### Tanpa Docker
+
+```bash
+cd backend
+pip install -r requirements.txt
 python app.py
-```
-
-Buka browser dan akses: **http://127.0.0.1:5000**
-
----
-
-## 🧮 Cara Penggunaan
-
-1. Buka halaman utama — baca konten edukasi stunting
-2. Gulir ke bagian **"Cek Status Stunting Anak Anda"**
-3. Isi form:
-   - **Usia anak** (dalam bulan, rentang 0–60)
-   - **Jenis kelamin** (Laki-laki / Perempuan)
-   - **Tinggi badan** (cm)
-   - **Berat badan** (kg)
-4. Klik **Periksa Sekarang**
-5. Sistem menampilkan:
-   - Status: Stunting / Risiko Stunting / Normal
-   - Z-score TB/U dan BB/U
-   - Skor defuzzifikasi
-   - Penjelasan dan saran dari AI
-
----
-
-## 🔬 Metodologi: Fuzzy Mamdani
-
-### 1. Perhitungan Z-Score WHO
-
-Z-score dihitung menggunakan tabel median dan standar deviasi WHO berdasarkan usia (bulan) dan jenis kelamin:
-
-```
-Z-score = (nilai_anak − median_WHO) / SD_WHO
-```
-
-Tabel mencakup **TB/U** dan **BB/U** untuk laki-laki dan perempuan, usia **0 hingga 60 bulan**.
-
----
-
-### 2. Variabel Input & Himpunan Fuzzy
-
-#### TB/U (Tinggi Badan per Usia)
-
-| Himpunan          | Fungsi Keanggotaan                                                               |
-| ----------------- | -------------------------------------------------------------------------------- |
-| **Sangat Pendek** | `μ = 1` jika z ≤ −3; `μ = (−2 − z)` jika −3 < z < −2; `μ = 0` jika z ≥ −2        |
-| **Pendek**        | `μ = (z + 3)` jika −3 < z < −2; `μ = (−1 − z)` jika −2 ≤ z < −1; `μ = 0` lainnya |
-| **Normal**        | `μ = 1` jika −2 ≤ z ≤ 2; `μ = 0` lainnya                                         |
-
-#### BB/U (Berat Badan per Usia)
-
-| Himpunan        | Fungsi Keanggotaan                                                               |
-| --------------- | -------------------------------------------------------------------------------- |
-| **Gizi Buruk**  | `μ = 1` jika z ≤ −3; `μ = (−2 − z)` jika −3 < z < −2; `μ = 0` jika z ≥ −2        |
-| **Gizi Kurang** | `μ = (z + 3)` jika −3 < z < −2; `μ = (−1 − z)` jika −2 ≤ z < −1; `μ = 0` lainnya |
-| **Gizi Normal** | `μ = 1` jika −2 ≤ z ≤ 1; `μ = 0` lainnya                                         |
-
----
-
-### 3. Rule Base (6 Aturan)
-
-| #   | IF TB/U       | AND BB/U    | THEN Output         | Operator |
-| --- | ------------- | ----------- | ------------------- | -------- |
-| R1  | Sangat Pendek | — (apapun)  | **Stunting**        | `μ(sp)`  |
-| R2  | Pendek        | Gizi Kurang | **Stunting**        | `min`    |
-| R3  | Pendek        | Gizi Buruk  | **Stunting**        | `min`    |
-| R4  | Pendek        | Gizi Normal | **Risiko Stunting** | `min`    |
-| R5  | Normal        | Gizi Kurang | **Risiko Stunting** | `min`    |
-| R6  | Normal        | Gizi Normal | **Normal**          | `min`    |
-
----
-
-### 4. Agregasi (Metode MAX)
-
-```python
-stunting = max(r1, r2, r3)
-risiko   = max(r4, r5)
-normal   = r6
+# Akses: http://127.0.0.1:5000
 ```
 
 ---
 
-### 5. Defuzzifikasi (Weighted Average)
+## 🚀 Deployment ke AWS EC2
 
-Setiap output diberi bobot numerik:
+```bash
+# 1. SSH ke EC2
+ssh -i tumbuhcerah-key.pem ubuntu@IP_EC2
 
-| Output          | Bobot |
-| --------------- | ----- |
-| Stunting        | 1.0   |
-| Risiko Stunting | 0.5   |
-| Normal          | 0.0   |
+# 2. Install Docker
+sudo apt update
+sudo apt install -y docker.io docker-compose-v2 git
+sudo usermod -aG docker ubuntu
+newgrp docker
 
-```python
-total   = (stunting × 1.0) + (risiko × 0.5) + (normal × 0.0)
-pembagi = stunting + risiko + normal
-skor    = total / pembagi
+# 3. Clone repo
+git clone https://github.com/matildeina/sistem-pakar-stunting-fuzzy.git
+cd sistem-pakar-stunting-fuzzy
+
+# 4. Buat .env
+nano .env
+
+# 5. Jalankan
+cd docker
+docker compose up -d --build
 ```
 
 ---
 
-### 6. Keputusan Akhir
+## 🔄 CI/CD Pipeline
 
-| Skor             | Keputusan             |
-| ---------------- | --------------------- |
-| skor > 0.7       | ⚠️ **Stunting**       |
-| 0.3 < skor ≤ 0.7 | △ **Risiko Stunting** |
-| skor ≤ 0.3       | ✓ **Normal**          |
+Pipeline otomatis via **GitHub Actions** (`.github/workflows/deploy.yml`):
 
 ---
 
-## 🌐 Alur Sistem
+## 🔐 Implementasi Keamanan
 
-```
-Input (TB cm, BB kg, Usia bulan, Jenis Kelamin)
-        ↓
-Lookup Tabel WHO → Hitung Z-score TB/U dan BB/U
-        ↓
-Fuzzifikasi → 6 Himpunan Fuzzy (TB/U × BB/U)
-        ↓
-Inferensi Mamdani → 6 Rule Base (MIN per rule)
-        ↓
-Agregasi → MAX per kategori output
-        ↓
-Defuzzifikasi → Weighted Average → Skor 0.0–1.0
-        ↓
-Keputusan: Stunting / Risiko Stunting / Normal
-        ↓
-Penjelasan AI (Claude API) dalam Bahasa Indonesia
-```
+| No | Fitur | Implementasi |
+|----|-------|-------------|
+| 1 | Password Hashing | Flask-Bcrypt |
+| 2 | Session Management | Flask Session + HttpOnly Cookie |
+| 3 | Validasi Input | Server-side validation |
+| 4 | SQL Injection Protection | SQLAlchemy ORM |
+| 5 | XSS Protection | Custom xss_filter.py |
+| 6 | CSRF Protection | Flask-WTF CSRFProtect |
+| 7 | Rate Limiting | Flask-Limiter (10/menit login) |
+| 8 | Brute Force Prevention | FailedLogin tracking + IP block |
+| 9 | Role-Based Access Control | Role: User / Admin |
+| 10 | Secure File Upload | Validasi ekstensi + Azure Blob |
+| 11 | Security Logging | Custom logger → security.log |
+| 12 | Reverse Proxy | Nginx dengan security headers |
 
 ---
 
-## 📊 Referensi Tabel WHO (Penggalan)
+## 🧮 Metodologi Fuzzy Mamdani
 
-Tabel lengkap 0–60 bulan tersedia di `app.py`. Berikut contoh beberapa usia kunci:
+### Variabel Input
 
-### Laki-laki
+**TB/U (Tinggi Badan per Usia)**
 
-| Usia     | Median TB (cm) | SD TB | Median BB (kg) | SD BB |
-| -------- | -------------- | ----- | -------------- | ----- |
-| 0 bulan  | 49.9           | 1.89  | 3.35           | 0.43  |
-| 6 bulan  | 67.6           | 2.28  | 7.93           | 0.74  |
-| 12 bulan | 75.7           | 2.44  | 9.62           | 0.85  |
-| 24 bulan | 87.8           | 2.67  | 11.68          | 1.00  |
-| 36 bulan | 97.1           | 2.87  | 13.24          | 1.13  |
-| 60 bulan | 112.4          | 3.26  | 15.96          | 1.39  |
+| Himpunan | Fungsi Keanggotaan |
+|----------|--------------------|
+| Sangat Pendek | μ = 1 jika z ≤ −3 |
+| Pendek | μ = (z+3) jika −3 < z < −2 |
+| Normal | μ = 1 jika −2 ≤ z ≤ 2 |
 
-### Perempuan
+**BB/U (Berat Badan per Usia)**
 
-| Usia     | Median TB (cm) | SD TB | Median BB (kg) | SD BB |
-| -------- | -------------- | ----- | -------------- | ----- |
-| 0 bulan  | 49.1           | 1.86  | 3.23           | 0.40  |
-| 6 bulan  | 65.7           | 2.26  | 7.25           | 0.69  |
-| 12 bulan | 74.0           | 2.46  | 8.95           | 0.81  |
-| 24 bulan | 86.4           | 2.73  | 11.24          | 1.00  |
-| 36 bulan | 96.2           | 2.97  | 13.12          | 1.18  |
-| 60 bulan | 112.9          | 3.43  | 16.99          | 1.56  |
+| Himpunan | Fungsi Keanggotaan |
+|----------|--------------------|
+| Gizi Buruk | μ = 1 jika z ≤ −3 |
+| Gizi Kurang | μ = (z+3) jika −3 < z < −2 |
+| Gizi Normal | μ = 1 jika −2 ≤ z ≤ 1 |
+
+### Rule Base
+
+| # | IF TB/U | AND BB/U | THEN |
+|---|---------|----------|------|
+| R1 | Sangat Pendek | — | Stunting |
+| R2 | Pendek | Gizi Kurang | Stunting |
+| R3 | Pendek | Gizi Buruk | Stunting |
+| R4 | Pendek | Gizi Normal | Risiko Stunting |
+| R5 | Normal | Gizi Kurang | Risiko Stunting |
+| R6 | Normal | Gizi Normal | Normal |
+
+### Keputusan Akhir
+
+| Skor | Status |
+|------|--------|
+| > 0.7 | ⚠️ Stunting |
+| 0.3 – 0.7 | △ Risiko Stunting |
+| ≤ 0.3 | ✓ Normal |
 
 ---
 
 ## 🛠️ Teknologi
 
-| Komponen             | Teknologi                                         |
-| -------------------- | ------------------------------------------------- |
-| Backend              | Python 3, Flask                                   |
-| Logika Fuzzy         | Implementasi manual (tanpa library eksternal)     |
-| Standar Antropometri | WHO Child Growth Standards 2006                   |
-| Frontend             | HTML5, CSS3, JavaScript (Vanilla)                 |
-| Tipografi            | Fraunces (Google Fonts), DM Sans                  |
-| AI Explanation       | Anthropic Claude API (`claude-sonnet-4-20250514`) |
+| Komponen | Teknologi |
+|----------|-----------|
+| Backend | Python 3.11, Flask, Gunicorn |
+| Database | SQLite (dev), MySQL (prod schema) |
+| AI Engine | Fuzzy Mamdani + NLP Sastrawi |
+| Frontend | HTML5, CSS3, JavaScript |
+| Container | Docker, Docker Compose |
+| Reverse Proxy | Nginx |
+| Cloud Compute | AWS EC2 (ap-southeast-2) |
+| Object Storage | Azure Blob Storage |
+| CI/CD | GitHub Actions |
+| Security | Flask-WTF, Flask-Bcrypt, Flask-Limiter |
 
 ---
 
-## 📦 Dependensi
+## 🌐 Live Demo
 
-```txt
-flask
+**URL:** http://32.236.142.31
+
+---
+
+## 📦 Environment Variables
+
+Buat file `.env` di root project:
+
+```env
+SECRET_KEY=your_secret_key
+DATABASE_URL=sqlite:///tumbuh_cerah.db
+DOCKER_USERNAME=your_dockerhub_username
+AZURE_CONNECTION_STRING=your_azure_connection_string
+AZURE_CONTAINER_NAME=foto-anak
 ```
-
-> Tidak ada dependensi fuzzy library eksternal. Seluruh logika Mamdani diimplementasikan secara native di `app.py`.
 
 ---
 
 ## ⚠️ Disclaimer
 
-Aplikasi ini bersifat **informatif dan edukatif** sebagai alat skrining awal. Hasil yang ditampilkan **bukan diagnosis medis resmi**. Konsultasikan selalu dengan dokter anak, ahli gizi, atau tenaga kesehatan terlatih untuk penanganan lebih lanjut.
+Aplikasi ini bersifat **informatif dan edukatif** sebagai alat skrining awal. Hasil yang ditampilkan **bukan diagnosis medis resmi**. Konsultasikan selalu dengan dokter anak atau tenaga kesehatan terlatih.
 
 ---
 
 ## 📚 Referensi
 
-- WHO. (2006). _WHO Child Growth Standards: Length/height-for-age, weight-for-age, weight-for-length, weight-for-height and body mass index-for-age_. World Health Organization.
-- Kemenkes RI. (2023). _Survei Status Gizi Indonesia (SSGI) 2023_. Kementerian Kesehatan Republik Indonesia.
-- Kemenkes RI. (2020). _Peraturan Menteri Kesehatan No. 2 Tahun 2020 tentang Standar Antropometri Anak_.
-- Mamdani, E. H., & Assilian, S. (1975). An experiment in linguistic synthesis with a fuzzy logic controller. _International Journal of Man-Machine Studies_, 7(1), 1–13.
-
----
-
-## 👨‍💻 Kontribusi
-
-Pull request dan issue sangat terbuka. Untuk perubahan besar, buka issue terlebih dahulu untuk mendiskusikan apa yang ingin diubah.
+- WHO. (2006). *WHO Child Growth Standards*. World Health Organization.
+- Kemenkes RI. (2023). *Survei Status Gizi Indonesia (SSGI) 2023*.
+- Kemenkes RI. (2020). *Peraturan Menteri Kesehatan No. 2 Tahun 2020*.
+- Mamdani, E. H., & Assilian, S. (1975). An experiment in linguistic synthesis with a fuzzy logic controller.
 
 ---
 
 <p align="center">
   Dibuat dengan ❤️ untuk generasi Indonesia yang sehat dan cerdas<br>
-  <strong>TumbuhCerah</strong> · Edukasi & Deteksi Stunting
+  <strong>TumbuhCerah</strong> · Deteksi Stunting Berbasis Cloud & AI
 </p>
-"# CI/CD test" 
