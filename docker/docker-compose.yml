@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-
   backend:
     build:
       context: ../backend
@@ -10,16 +7,18 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - SECRET_KEY=${SECRET_KEY:-tumbuh_cerah_super_secret_key_2026}
-      - DATABASE_URL=${DATABASE_URL:-sqlite:///tumbuh_cerah.db}
+      - SECRET_KEY=tumbuh_cerah_super_secret_key_2026
+      - DATABASE_URL=sqlite:///tumbuh_cerah.db
       - FLASK_ENV=production
+      - AZURE_CONNECTION_STRING=${AZURE_CONNECTION_STRING}
+      - AZURE_CONTAINER_NAME=foto-anak
     volumes:
       - ../backend/instance:/app/instance
       - ../backend/logs:/app/logs
+      - ../frontend:/frontend
     restart: unless-stopped
     networks:
       - tumbuhcerah_net
-
   nginx:
     image: nginx:alpine
     container_name: tumbuhcerah_nginx
@@ -34,7 +33,6 @@ services:
     restart: unless-stopped
     networks:
       - tumbuhcerah_net
-
 networks:
   tumbuhcerah_net:
     driver: bridge
