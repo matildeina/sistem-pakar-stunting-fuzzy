@@ -13,6 +13,12 @@ from models.activity_log import FailedLogin
 
 from extensions import db, bcrypt, limiter
 from utils.logger import log_security_event
+from services.telegram_alert import (
+    alert_brute_force,
+    alert_login_gagal,
+    alert_login_berhasil,
+    alert_register_baru
+)
 
 from datetime import datetime, timedelta
 
@@ -29,7 +35,6 @@ def register():
         return redirect(url_for("api.index"))
 
     if request.method == "POST":
-        # Ambil data JSON dengan aman, jika gagal set menjadi dict kosong {}
         try:
             data = request.get_json()
             if data is None:
@@ -37,7 +42,6 @@ def register():
         except Exception:
             data = request.form
 
-        # Pastikan data tidak None sebelum memakai .get()
         if not data:
             return jsonify({"error": "Format data tidak valid atau kosong"}), 400
 
@@ -81,7 +85,7 @@ def register():
             )
             db.session.add(new_user)
             db.session.commit()
-            
+
         except Exception as e:
             db.session.rollback()
             return jsonify({"error": "Gagal menyimpan data ke database"}), 500
@@ -94,7 +98,12 @@ def register():
                 new_user.id
             )
         except Exception:
-            # Jika logger error, registrasi tetap berhasil tapi log dilewati
+            pass
+
+        # 8. Telegram Alert
+        try:
+            alert_register_baru(username)
+        except Exception:
             pass
 
         return jsonify({
@@ -111,7 +120,6 @@ def register():
 @limiter.limit("10 per minute")
 def login():
 
-    # Jika sudah login langsung ke landing page
     if request.method == "GET" and 'user_id' in session:
         return redirect(url_for("api.index"))
 
@@ -139,6 +147,12 @@ def login():
                 "WARNING"
             )
 
+            # Telegram Alert Brute Force
+            try:
+                alert_brute_force(request.remote_addr, username)
+            except Exception:
+                pass
+
             return jsonify({
                 "error": "Terlalu banyak percobaan gagal. Silakan coba lagi dalam 5 menit."
             }), 429
@@ -165,11 +179,15 @@ def login():
                 user.id
             )
 
+            # Telegram Alert Login Berhasil
+            try:
+                alert_login_berhasil(user.username)
+            except Exception:
+                pass
+
             return jsonify({
                 "message": "Login sukses",
                 "role": user.role,
-
-                # LANDING PAGE
                 "redirect": url_for("api.index")
             })
 
@@ -188,6 +206,12 @@ def login():
             f"Gagal login username: {username}",
             "WARNING"
         )
+
+        # Telegram Alert Login Gagal
+        try:
+            alert_login_gagal(request.remote_addr, username)
+        except Exception:
+            pass
 
         return jsonify({
             "error": "Username atau password salah"
