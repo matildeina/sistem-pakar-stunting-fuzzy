@@ -1,4 +1,5 @@
 services:
+
   backend:
     build:
       context: ../backend
@@ -12,6 +13,8 @@ services:
       - FLASK_ENV=production
       - AZURE_CONNECTION_STRING=${AZURE_CONNECTION_STRING}
       - AZURE_CONTAINER_NAME=foto-anak
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
     volumes:
       - ../backend/instance:/app/instance
       - ../backend/logs:/app/logs
@@ -19,6 +22,7 @@ services:
     restart: unless-stopped
     networks:
       - tumbuhcerah_net
+
   nginx:
     image: nginx:alpine
     container_name: tumbuhcerah_nginx
@@ -33,6 +37,7 @@ services:
     restart: unless-stopped
     networks:
       - tumbuhcerah_net
+
 networks:
   tumbuhcerah_net:
     driver: bridge
