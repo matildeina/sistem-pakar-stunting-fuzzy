@@ -109,7 +109,7 @@ Pipeline otomatis via **GitHub Actions** (`.github/workflows/deploy.yml`):
 | 6 | CSRF Protection | Flask-WTF CSRFProtect |
 | 7 | Rate Limiting | Flask-Limiter (10/menit login) |
 | 8 | Brute Force Prevention | FailedLogin tracking + IP block |
-| 9 | Role-Based Access Control | Role: User / Admin |
+| 9 | Role-Based Access Control | Belum diimplementasikan (planned enhancement)|
 | 10 | Secure File Upload | Validasi ekstensi + Azure Blob |
 | 11 | Security Logging | Custom logger → security.log |
 | 12 | Reverse Proxy | Nginx dengan security headers |
